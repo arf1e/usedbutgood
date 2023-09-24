@@ -1,3 +1,4 @@
+
 # Front-end Project
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
@@ -7,6 +8,8 @@
 
 This project requires implementation of TypeScript and SASS.
 
+## Architecture
+![Architecture image](https://i.ibb.co/xjbNcgc/README-md.png)
 ## Requirement
 
 1. Use the API endpoint [https://fakeapi.platzi.com/](https://fakeapi.platzi.com/) to create an e-commerce website. Read the documentation and learn how to use the different endpoints.
