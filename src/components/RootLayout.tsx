@@ -1,11 +1,10 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import Header from './Header';
 const RootLayout = () => {
   return (
     <>
-      <Box component="header" sx={{ backgroundColor: 'lightblue' }}>
-        <Typography variant="body2">Header</Typography>
-      </Box>
+      <Header />
       <main>
         <Outlet />
       </main>
