@@ -1,21 +1,33 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
 import { API_URL } from '../config/api';
-import { ProductType } from '../types/product';
+import { mapFiltersToQueryParams } from '../utils/filtering';
+import {
+  CategoryType,
+  ProductApiFiltersInterface,
+  ProductType,
+} from '../types/product';
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
   endpoints: (builder) => ({
-    getProducts: builder.query<ProductType[], void>({
-      query: () => ({
+    getAllProducts: builder.query<
+      ProductType[],
+      Partial<ProductApiFiltersInterface>
+    >({
+      query: (filters = {}) => ({
         url: 'products',
         params: {
-          limit: 5,
-          offset: 0,
+          ...mapFiltersToQueryParams(filters),
         },
+      }),
+    }),
+    getCategories: builder.query<CategoryType[], void>({
+      query: () => ({
+        url: 'categories',
       }),
     }),
   }),
 });
 
-export const { useGetProductsQuery } = productsApi;
+export const { useGetAllProductsQuery } = productsApi;

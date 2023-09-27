@@ -21,7 +21,7 @@ const ProductCard = ({ product }: Props) => {
   };
   return (
     <Card sx={{ backgroundColor: 'azure', maxWidth: 320 }}>
-      <CardActionArea onClick={() => alert('salam')}>
+      <CardActionArea>
         <CardMedia
           component="img"
           sx={{ objectFit: 'contain' }}
