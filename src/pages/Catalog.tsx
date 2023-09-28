@@ -15,22 +15,11 @@ const Catalog = () => {
     selectFilters(state.products)
   );
   const { error, isLoading } = useGetAllProductsQuery(filters);
-  const dispatch = useDispatch<AppDispatch>();
   const data = useSelector((state: RootState) =>
     selectProducts(state.products)
   );
-  const handleTitleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setFilterTitle(e.target.value));
-  };
   return (
     <Box flex="1" sx={{ backgroundColor: 'turquoise' }}>
-      <TextField
-        label="Search"
-        variant="outlined"
-        fullWidth
-        value={filters.title}
-        onChange={handleTitleUpdate}
-      />
       <Container>
         <Typography variant="h1">Catalog</Typography>
         {isLoading && <Typography>Loading...</Typography>}

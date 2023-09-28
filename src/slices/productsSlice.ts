@@ -12,9 +12,11 @@ type ProductsState = {
   products: ProductType[];
 };
 
-const initialState: ProductsState = {
+export const initialState: ProductsState = {
   products: [],
-  filters: {},
+  filters: {
+    title: '',
+  },
   page: 1,
   totalPages: 1,
 };
