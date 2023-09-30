@@ -1,10 +1,11 @@
 import { Box, Container, Typography } from '@mui/material';
 import CartButton from './CartButton';
 import CartOverlay from './CartOverlay';
+import ProfileButton from './ProfileButton';
 
 export default function Header() {
   return (
-    <Box component="header" sx={{ backgroundColor: 'lightblue' }}>
+    <Box component="header">
       <CartOverlay />
       <Container>
         <Box
@@ -13,7 +14,15 @@ export default function Header() {
           <Typography component="h1" variant="h4">
             FakeStore
           </Typography>
-          <CartButton />
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <ProfileButton />
+            <CartButton />
+          </Box>
         </Box>
       </Container>
     </Box>

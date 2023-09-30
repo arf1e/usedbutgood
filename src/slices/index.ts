@@ -6,9 +6,15 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import { productsApi } from '../apis/fakestore';
 import cartReducer, { CartState } from './cartSlice';
 import productsReducer from './productsSlice';
+import authReducer, { AuthState } from './authSlice';
 
 const cartPersistConfig = {
   key: 'cart',
+  storage: localforage,
+};
+
+const authPersistConfig = {
+  key: 'auth',
   storage: localforage,
 };
 
@@ -21,6 +27,10 @@ export const initiateStore = () =>
         cartReducer
       ),
       products: productsReducer,
+      auth: persistReducer<AuthState, AnyAction>(
+        authPersistConfig,
+        authReducer
+      ),
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(productsApi.middleware),

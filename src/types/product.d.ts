@@ -19,3 +19,11 @@ export interface ProductApiFiltersInterface {
   priceRange: [number, number];
   categoryId: number;
 }
+
+export interface CreateProductInterface {
+  title: string;
+  price: number;
+  description: string;
+  images: string[];
+  categoryId: number;
+}
