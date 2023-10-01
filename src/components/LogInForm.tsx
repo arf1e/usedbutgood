@@ -12,7 +12,6 @@ export default function LogInForm() {
   const [logIn] = useLogInMutation();
   const handleSubmit = (values: LoginInterface, resetForm: () => void) => {
     logIn(values);
-    resetForm();
   };
   return (
     <Box>
