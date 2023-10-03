@@ -5,9 +5,12 @@ import { AppDispatch, RootState } from '../slices';
 import { logOut, selectJwt, selectUser } from '../slices/authSlice';
 import { JWTPairType } from '../types/user';
 
-export default function ProfileInfo() {
-  const jwt = useSelector((state: RootState) => selectJwt(state));
-  const { isLoading, error } = useGetProfileQuery(jwt as JWTPairType);
+type Props = {
+  jwt: JWTPairType;
+};
+
+export default function ProfileInfo({ jwt }: Props) {
+  const { isLoading, error } = useGetProfileQuery(jwt);
   const profile = useSelector((state: RootState) => selectUser(state));
   const dispatch = useDispatch<AppDispatch>();
   const handleLogOut = () => {

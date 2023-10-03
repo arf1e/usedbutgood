@@ -1,6 +1,21 @@
 import { CloseOutlined } from '@mui/icons-material';
-import { Box, Container, IconButton, Typography } from '@mui/material';
+import { Box, Container, IconButton, styled, Typography } from '@mui/material';
 import useCartOverlay from '../hooks/useCartOverlay';
+import Heading from './Heading';
+
+const CartOverlayContainer = styled(Box)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: white;
+
+  .close-icon {
+    color: ${({ theme }) => theme.palette.primary.main};
+  }
+`;
 
 export default function CartOverlay() {
   const { isShown, hideCartOverlay } = useCartOverlay();
@@ -8,27 +23,15 @@ export default function CartOverlay() {
   if (!isShown) return <></>;
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 2,
-        backgroundColor: 'white',
-      }}
-    >
+    <CartOverlayContainer>
       <Container>
         <Box sx={{ display: 'flex', py: 2, justifyContent: 'flex-end' }}>
           <IconButton onClick={hideCartOverlay}>
-            <CloseOutlined />
+            <CloseOutlined className="close-icon" />
           </IconButton>
         </Box>
-        <Typography variant="h2" component="h2">
-          Cart
-        </Typography>
+        <Heading variant="h2">Cart</Heading>
       </Container>
-    </Box>
+    </CartOverlayContainer>
   );
 }

@@ -16,7 +16,8 @@ export type ProductType = {
 export interface ProductApiFiltersInterface {
   title: string;
   price: number;
-  priceRange: [number, number];
+  minPrice: number;
+  maxPrice: number;
   categoryId: number;
 }
 

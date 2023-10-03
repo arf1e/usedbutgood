@@ -14,9 +14,7 @@ type ProductsState = {
 
 export const initialState: ProductsState = {
   products: [],
-  filters: {
-    title: '',
-  },
+  filters: {},
   page: 1,
   totalPages: 1,
 };
@@ -29,21 +27,11 @@ export const productsSlice = createSlice({
       state.totalPages = action.payload;
     },
 
-    setFilterTitle: (state, action: PayloadAction<string>) => {
-      state.filters.title = action.payload;
-      state.page = 1;
-    },
-
-    setFilterCategoryId: (state, action: PayloadAction<number>) => {
-      state.filters.categoryId = action.payload;
-      state.page = 1;
-    },
-
-    setFilterPriceRange: (
+    setFilters: (
       state,
-      action: PayloadAction<ProductApiFiltersInterface['priceRange']>
+      action: PayloadAction<Partial<ProductApiFiltersInterface>>
     ) => {
-      state.filters.priceRange = action.payload;
+      state.filters = action.payload;
       state.page = 1;
     },
 
@@ -86,10 +74,10 @@ export const productsSlice = createSlice({
 
 export const {
   setTotalPages,
+  setFilters,
   incrementPage,
   decrementPage,
   setPage,
-  setFilterTitle,
 } = productsSlice.actions;
 
 export const selectProducts = (state: ProductsState) => {

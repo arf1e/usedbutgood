@@ -5,9 +5,11 @@ export const mapFiltersToQueryParams = (
 ) => {
   return {
     ...filters,
-    ...(filters.priceRange && {
-      price_min: filters.priceRange[0],
-      price_max: filters.priceRange[1],
+    ...(filters.minPrice && {
+      price_min: filters.minPrice,
+    }),
+    ...(filters.maxPrice && {
+      price_max: filters.maxPrice,
     }),
   };
 };

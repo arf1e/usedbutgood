@@ -1,18 +1,35 @@
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  Typography,
-} from '@mui/material';
+import { Box, styled, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../slices/cartSlice';
 import { ProductType } from '../types/product';
+import CategoryBadge from './CategoryBadge';
 
 type Props = {
   product: ProductType;
 };
+
+const ProductCardContainer = styled(Box)<{ image: string }>`
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: ${({ theme, image }) =>
+    `url(${image}), linear-gradient(45deg, ${theme.palette.primary.light}, ${theme.palette.primary.dark})`};
+  .preview {
+    width: 80px;
+    height: 80px;
+    background: ${({ theme }) => theme.palette.primary.light};
+    border-radius: 50%;
+  }
+
+  .title {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 0.2em;
+    text-transform: uppercase;
+  }
+`;
 
 const ProductCard = ({ product }: Props) => {
   const dispatch = useDispatch();
@@ -20,28 +37,17 @@ const ProductCard = ({ product }: Props) => {
     dispatch(addToCart({ product, quantity: 1 }));
   };
   return (
-    <Card sx={{ backgroundColor: 'azure', maxWidth: 320 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          sx={{ objectFit: 'contain' }}
-          height={120}
-          image={product.images[0]}
-          alt={product.title}
-        />
-      </CardActionArea>
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+    <ProductCardContainer component="a" image={product.images[0]}>
+      <Box className="details">
+        <Typography variant="h6" className="title">
           {product.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.description}
+        <CategoryBadge category={product.category} size="small" />
+        <Typography className="price" variant="body1">
+          ${product.price}
         </Typography>
-        <Button variant="contained" fullWidth onClick={handleAddToCart}>
-          Add to cart
-        </Button>
-      </CardContent>
-    </Card>
+      </Box>
+    </ProductCardContainer>
   );
 };
 

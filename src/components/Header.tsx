@@ -1,25 +1,32 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, useTheme } from '@mui/material';
+import AppLogo from './AppLogo';
 import CartButton from './CartButton';
 import CartOverlay from './CartOverlay';
 import ProfileButton from './ProfileButton';
+import ThemeSwitch from './ThemeSwitch';
 
 export default function Header() {
+  const theme = useTheme();
   return (
     <Box component="header">
       <CartOverlay />
       <Container>
         <Box
-          sx={{ display: 'flex', paddingY: 2, justifyContent: 'space-between' }}
+          sx={{
+            display: 'flex',
+            paddingY: 2,
+            bgcolor: theme.palette.background.default,
+            justifyContent: 'space-between',
+          }}
         >
-          <Typography component="h1" variant="h4">
-            FakeStore
-          </Typography>
+          <AppLogo />
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
             }}
           >
+            <ThemeSwitch />
             <ProfileButton />
             <CartButton />
           </Box>

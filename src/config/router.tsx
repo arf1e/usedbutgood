@@ -21,6 +21,7 @@ const router = createBrowserRouter([
         path: '/product/:id',
         element: <Product />,
       },
+      { path: '/new', element: <div>New posting</div> },
     ],
   },
 ]);
