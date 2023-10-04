@@ -6,6 +6,7 @@ import { ProductApiFiltersInterface } from '../types/product';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 import Heading from './Heading';
 import * as yup from 'yup';
+import CategoryPicker from './CategoryPicker';
 
 const ProductsFilterContainer = styled(Box)`
   background: ${({ theme }) => composeBackgroundColor(theme)};
@@ -28,11 +29,12 @@ const ProductsFilterContainer = styled(Box)`
 
 const filtersInitialValues: Partial<ProductApiFiltersInterface> = {
   title: '',
+  categoryId: '',
 };
 
 const validationSchema = yup.object({
   title: yup.string(),
-  categoryId: yup.number(),
+  categoryId: yup.string().matches(/^\d*$/, 'Must be a number'),
   minPrice: yup.string().matches(/^\d*$/, 'Must be a number'),
   maxPrice: yup.string().matches(/^\d*$/, 'Must be a number'),
 });
@@ -60,7 +62,7 @@ export default function ProductsFilter() {
               value={formikProps.values.title}
               onChange={formikProps.handleChange('title')}
             />
-            <Box className="price-range" sx={{ mt: 2 }}>
+            <Box className="price-range" sx={{ marginY: 2 }}>
               <TextField
                 label="Min price"
                 variant="outlined"
@@ -78,6 +80,12 @@ export default function ProductsFilter() {
                 fullWidth
               />
             </Box>
+            <CategoryPicker
+              value={formikProps.values.categoryId || ''}
+              setValue={(value) =>
+                formikProps.setFieldValue('categoryId', value)
+              }
+            />
             <Button type="submit" variant="contained" sx={{ mt: 2 }}>
               Apply
             </Button>

@@ -18,13 +18,13 @@ export interface ProductApiFiltersInterface {
   price: number;
   minPrice: number;
   maxPrice: number;
-  categoryId: number;
+  categoryId: string;
 }
 
 export interface CreateProductInterface {
   title: string;
-  price: number;
+  price: string;
   description: string;
   images: string[];
-  categoryId: number;
+  categoryId: string;
 }

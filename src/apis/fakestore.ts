@@ -78,6 +78,7 @@ export const productsApi = createApi({
 export const {
   useGetAllProductsQuery,
   useGetCategoriesQuery,
+  useCreateProductMutation,
   useLogInMutation,
   useGetProfileQuery,
 } = productsApi;

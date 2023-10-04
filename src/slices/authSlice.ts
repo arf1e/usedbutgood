@@ -42,5 +42,12 @@ export const { logOut } = authSlice.actions;
 
 export const selectJwt = (state: { auth: AuthState }) => state.auth.jwt;
 export const selectUser = (state: { auth: AuthState }) => state.auth.user;
+export const selectAdminRights = (state: { auth: AuthState }) => {
+  const user = state.auth.user;
+  if (user) {
+    return user.role === 'admin';
+  }
+  return false;
+};
 
 export default authSlice.reducer;
