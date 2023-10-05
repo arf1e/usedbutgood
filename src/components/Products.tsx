@@ -2,6 +2,7 @@ import { Container, Grid } from '@mui/material';
 import Heading from './Heading';
 import ProductList from './ProductList';
 import ProductsFilter from './ProductsFilter';
+import ProductsPagination from './ProductsPagination';
 
 export default function Products() {
   return (
@@ -10,11 +11,14 @@ export default function Products() {
         Product catalog
       </Heading>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12}>
           <ProductsFilter />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12}>
           <ProductList />
+        </Grid>
+        <Grid item xs={12}>
+          <ProductsPagination />
         </Grid>
       </Grid>
     </Container>

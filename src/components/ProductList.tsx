@@ -1,10 +1,13 @@
-import { Box, Container, Grid, styled, Typography } from '@mui/material';
+import { Box, Grid, Skeleton, styled } from '@mui/material';
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetAllProductsQuery } from '../apis/fakestore';
 import { RootState } from '../slices';
-import { selectFilters, selectProducts } from '../slices/productsSlice';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
-import Heading from './Heading';
+import {
+  PRODUCTS_PER_PAGE,
+  selectFilters,
+  selectProducts,
+} from '../slices/productsSlice';
 import ProductCard from './ProductCard';
 
 const ProductsListContainer = styled(Box)``;
@@ -18,11 +21,20 @@ export default function ProductList() {
     selectProducts(state.products)
   );
 
+  const renderSkeletons = useMemo(() => {
+    return new Array(PRODUCTS_PER_PAGE).fill(null).map((_, index) => (
+      <Grid key={index} item xs={6} sm={4} md={3}>
+        <Skeleton key={index} width="100%" height="120px" />
+      </Grid>
+    ));
+  }, []);
+
   return (
     <ProductsListContainer>
-      <Grid container columns={12} spacing={1}>
+      <Grid container columns={12} spacing={2}>
+        {isLoading && renderSkeletons}
         {products.map((product) => (
-          <Grid key={product.id} item xs={12} sm={6} md={4}>
+          <Grid key={product.id} item xs={12} sm={4} md={3}>
             <ProductCard product={product} />
           </Grid>
         ))}

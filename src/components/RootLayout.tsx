@@ -1,5 +1,5 @@
-import { Box, Grid, Typography } from '@mui/material';
 import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
 import Header from './Header';
 const RootLayout = () => {
   return (
@@ -8,9 +8,7 @@ const RootLayout = () => {
       <main>
         <Outlet />
       </main>
-      <Box component="footer" sx={{ backgroundColor: 'lightcoral' }}>
-        <Typography variant="body2">Footer</Typography>
-      </Box>
+      <Footer />
     </>
   );
 };

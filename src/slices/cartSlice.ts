@@ -61,6 +61,11 @@ export const selectTotalPrice = (state: CartState) => {
   return _.sumBy(state.items, (item) => item.product.price * item.quantity);
 };
 
+export const selectItemQuantityInCart = (state: CartState, id: number) => {
+  const item = state.items.find((item) => item.product.id === id);
+  return item ? item.quantity : 0;
+};
+
 export const {
   addToCart,
   clearCart,

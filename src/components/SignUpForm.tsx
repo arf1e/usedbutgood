@@ -14,7 +14,7 @@ import composeBackgroundColor from '../utils/composeBackgroundColor';
 import Heading from './Heading';
 
 type Props = {
-  switchToSignUp: () => void;
+  switchToLogIn: () => void;
 };
 
 const LogInFormContainer = styled(Box)`
@@ -28,14 +28,17 @@ const LogInFormContainer = styled(Box)`
   }
 `;
 
-const initialValues: LoginInterface = {
+const initialValues = {
   email: '',
   password: '',
+  name: '',
+  role: 'customer',
+  avatar: 'https://api.lorem.space/image/face?w=640&h=480&r=867',
 };
 
-export default function LogInForm({ switchToSignUp }: Props) {
+export default function SignUpForm({ switchToLogIn }: Props) {
   const { formState, message, setFormState, setMessage } = useStatusBar();
-  const [submit] = useLogInMutation();
+  const submit = async (obj: any) => ({ result: obj });
   const handleSubmit = useCallback(
     async (values: LoginInterface, reset: () => void) => {
       setFormState(FORM_LOADING);
@@ -46,17 +49,17 @@ export default function LogInForm({ switchToSignUp }: Props) {
           const errorMessage = _.get(
             result,
             ['error', 'data', 'message'],
-            'Failed to log in.'
+            'Failed to create an account.'
           );
           setMessage(errorMessage);
           return;
         }
         setFormState(FORM_SUCCESS);
-        setMessage('Successfully logged in.');
+        setMessage('Successfully signed up!');
         reset();
       } catch (e) {
         setFormState(FORM_ERROR);
-        setMessage('Failed to log in due to a network error.');
+        setMessage('Failed to send a form due to a network error.');
       }
     },
     [setFormState, setMessage, submit]
@@ -72,7 +75,7 @@ export default function LogInForm({ switchToSignUp }: Props) {
           {(formikProps) => (
             <form onSubmit={formikProps.handleSubmit}>
               <Heading variant="h5" sx={{ mb: 3 }}>
-                Log in
+                Sign up
               </Heading>
               <TextField
                 label="Email"
@@ -87,9 +90,16 @@ export default function LogInForm({ switchToSignUp }: Props) {
                 value={formikProps.values.password}
                 onChange={formikProps.handleChange('password')}
                 type="password"
+                sx={{ mb: 2 }}
+              />
+              <TextField
+                label="Name"
+                name="name"
+                value={formikProps.values.name}
+                onChange={formikProps.handleChange('name')}
               />
               <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                Log in
+                Create account
               </Button>
             </form>
           )}
@@ -97,12 +107,12 @@ export default function LogInForm({ switchToSignUp }: Props) {
       </LogInFormContainer>
       <Button
         variant="text"
-        onClick={switchToSignUp}
+        onClick={switchToLogIn}
         color="secondary"
         fullWidth
         sx={{ mt: 1 }}
       >
-        I don't have an account yet
+        I already have an account
       </Button>
     </>
   );

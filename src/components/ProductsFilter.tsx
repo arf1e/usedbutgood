@@ -56,13 +56,14 @@ export default function ProductsFilter() {
       >
         {(formikProps) => (
           <form onSubmit={formikProps.handleSubmit}>
-            <TextField
-              label="Product title"
-              variant="outlined"
-              value={formikProps.values.title}
-              onChange={formikProps.handleChange('title')}
-            />
             <Box className="price-range" sx={{ marginY: 2 }}>
+              <TextField
+                label="Product title"
+                variant="outlined"
+                fullWidth
+                value={formikProps.values.title}
+                onChange={formikProps.handleChange('title')}
+              />
               <TextField
                 label="Min price"
                 variant="outlined"

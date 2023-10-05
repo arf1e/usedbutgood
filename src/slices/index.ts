@@ -24,6 +24,7 @@ const cartPersistConfig = {
 const authPersistConfig = {
   key: 'auth',
   storage: localforage,
+  blacklist: ['user'],
 };
 
 export const initiateStore = () =>
