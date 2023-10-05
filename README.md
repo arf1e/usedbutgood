@@ -1,3 +1,5 @@
+[![Install & test frontend project](https://github.com/arf1e/fs16_6-frontend-project/actions/workflows/nodejs-test.yml/badge.svg)](https://github.com/arf1e/fs16_6-frontend-project/actions/workflows/nodejs-test.yml)
+
 # Front-end Project
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
