@@ -75,7 +75,12 @@ export default function ProductImagery({
       {hidden && (
         <Box className="disclaimer">
           <Typography variant="caption">Disclaimer</Typography>
-          <Typography variant="h6" component="strong" sx={{ mb: 2 }}>
+          <Typography
+            variant="h6"
+            align="center"
+            component="strong"
+            sx={{ mb: 2 }}
+          >
             🌍 Internet is an awesome place.
           </Typography>
           <Typography variant="body2" sx={{ mb: 1 }}>

@@ -1,12 +1,13 @@
 import { Box, Button, styled, TextField } from '@mui/material';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import { setFilters } from '../slices/productsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilters, setFilters } from '../slices/productsSlice';
 import { ProductApiFiltersInterface } from '../types/product';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 import Heading from './Heading';
 import * as yup from 'yup';
 import CategoryPicker from './CategoryPicker';
+import { RootState } from '../slices';
 
 const ProductsFilterContainer = styled(Box)`
   background: ${({ theme }) => composeBackgroundColor(theme)};
@@ -44,13 +45,16 @@ export default function ProductsFilter() {
   const handleSetFilters = (values: Partial<ProductApiFiltersInterface>) => {
     dispatch(setFilters(values));
   };
+  const filters = useSelector((state: RootState) =>
+    selectFilters(state.products)
+  );
   return (
     <ProductsFilterContainer>
       <Heading variant="h5" sx={{ mb: 2 }}>
         Filters
       </Heading>
       <Formik
-        initialValues={filtersInitialValues}
+        initialValues={{ ...filtersInitialValues, ...filters }}
         validationSchema={validationSchema}
         onSubmit={handleSetFilters}
       >

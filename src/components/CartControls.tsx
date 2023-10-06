@@ -1,4 +1,4 @@
-import { DeleteOutlined } from '@mui/icons-material';
+import { DeleteOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -48,6 +48,7 @@ export default function CartControls({ product, size = 'small' }: Props) {
         color="primary"
         size={size}
         onClick={handleAddToCart}
+        startIcon={<ShoppingCartOutlined />}
       >
         Add to cart
       </Button>
