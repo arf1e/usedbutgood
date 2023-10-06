@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { productsApi } from '../../apis/fakestore';
-import productsReducer from '../../slices/productsSlice';
+import productsReducer, { PRODUCTS_PER_PAGE } from '../../slices/productsSlice';
+import products from '../__fixtures__/products';
 import mockServer from '../mocks/server';
 
 describe('RTK-Query side effects', () => {
@@ -30,7 +31,8 @@ describe('RTK-Query side effects', () => {
         initialState.products.filters
       )
     );
-    expect(store.getState().products.totalPages).toBe(2);
+    const expectedPages = Math.ceil(products.length / PRODUCTS_PER_PAGE);
+    expect(store.getState().products.totalPages).toBe(expectedPages);
     expect(store.getState().products.products).not.toHaveLength(0);
   });
 
