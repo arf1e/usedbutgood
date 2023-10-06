@@ -81,4 +81,5 @@ export const {
   useCreateProductMutation,
   useLogInMutation,
   useGetProfileQuery,
+  useGetProductByIdQuery,
 } = productsApi;

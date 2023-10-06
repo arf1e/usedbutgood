@@ -66,6 +66,10 @@ export const selectItemQuantityInCart = (state: CartState, id: number) => {
   return item ? item.quantity : 0;
 };
 
+export const selectCartItems = (state: CartState) => {
+  return state.items;
+};
+
 export const {
   addToCart,
   clearCart,

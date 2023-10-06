@@ -3,7 +3,7 @@ import { productsApi } from '../apis/fakestore';
 import { ProductApiFiltersInterface, ProductType } from '../types/product';
 import { calculateTotalPages, getPaginatedSlice } from '../utils/pagination';
 
-export const PRODUCTS_PER_PAGE = 16;
+export const PRODUCTS_PER_PAGE = 12;
 
 type ProductsState = {
   page: number;

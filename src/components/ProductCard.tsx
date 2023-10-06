@@ -6,22 +6,16 @@ import {
   Card,
   CardActions,
   CardContent,
-  IconButton,
   Typography,
   useTheme,
 } from '@mui/material';
-import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { RootState } from '../slices';
-import {
-  addToCart,
-  decrementQuantity,
-  incrementQuantity,
-  removeFromCart,
-  selectItemQuantityInCart,
-} from '../slices/cartSlice';
+import { selectItemQuantityInCart } from '../slices/cartSlice';
 import { ProductType } from '../types/product';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
+import CartControls from './CartControls';
 import CategoryBadge from './CategoryBadge';
 
 type Props = {
@@ -29,71 +23,16 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const dispatch = useDispatch();
-  const handleAddToCart = useCallback(() => {
-    dispatch(addToCart({ product, quantity: 1 }));
-  }, [dispatch, product]);
-  const handleIncrement = useCallback(() => {
-    dispatch(incrementQuantity(product));
-  }, [dispatch, product]);
-  const handleDecrement = useCallback(() => {
-    dispatch(decrementQuantity(product));
-  }, [dispatch, product]);
   const itemQty = useSelector((state: RootState) =>
     selectItemQuantityInCart(state.cart, product.id)
   );
-  const handleClear = useCallback(() => {
-    dispatch(removeFromCart(product));
-  }, [dispatch, product]);
   const theme = useTheme();
 
-  const renderAddToCartButton = useMemo(() => {
-    return (
-      <Button
-        variant="text"
-        color="primary"
-        size="small"
-        onClick={handleAddToCart}
-      >
-        Add to cart
-      </Button>
-    );
-  }, []);
-  const renderQuantityControls = useMemo(() => {
-    return (
-      <Box
-        sx={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <ButtonGroup
-          disableElevation={true}
-          size="small"
-          aria-label="small button group"
-        >
-          <Button sx={{}} onClick={handleDecrement}>
-            -
-          </Button>
-          <Button disabled>
-            <Typography variant="body2" color="text.primary">
-              {itemQty}
-            </Typography>
-          </Button>
-          <Button onClick={handleIncrement}>+</Button>
-        </ButtonGroup>
-        <IconButton color="error" size="small" onClick={handleClear}>
-          <DeleteOutlined />
-        </IconButton>
-      </Box>
-    );
-  }, [itemQty, handleIncrement, handleDecrement, handleClear]);
   return (
     <Card
       sx={{
         bgcolor: composeBackgroundColor(theme),
+        minHeight: 280,
         boxShadow: 'none',
       }}
     >
@@ -101,9 +40,26 @@ const ProductCard = ({ product }: Props) => {
         <Box display="flex" sx={{ mb: 1 }}>
           <CategoryBadge size="small" category={product.category} />
         </Box>
-        <Typography variant="h6">{product.title}</Typography>
+        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
+          <Typography
+            variant="h6"
+            color="primary"
+            sx={{
+              lineHeight: '125%',
+              transition: '0.2s',
+              my: 2,
+              '&:hover': {
+                color: theme.palette.text.primary,
+              },
+            }}
+          >
+            {product.title}
+          </Typography>
+        </Link>
         <Typography variant="body2">
-          {product.description.slice(0, 140)}
+          {product.description.length > 140
+            ? `${product.description.slice(0, 140)}...`
+            : product.description}
         </Typography>
         <Typography variant="h6" sx={{ mt: 2, fontWeight: 600 }}>
           ${itemQty === 0 ? `${product.price}` : `${itemQty * product.price}`}
@@ -115,8 +71,7 @@ const ProductCard = ({ product }: Props) => {
         )}
       </CardContent>
       <CardActions>
-        {itemQty === 0 && renderAddToCartButton}
-        {itemQty > 0 && renderQuantityControls}
+        <CartControls product={product} />
       </CardActions>
     </Card>
   );

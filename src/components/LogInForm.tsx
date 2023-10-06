@@ -1,4 +1,4 @@
-import { Box, Button, styled, TextField } from '@mui/material';
+import { Box, Button, Grow, styled, TextField, Zoom } from '@mui/material';
 import { Formik } from 'formik';
 import { useCallback } from 'react';
 import _ from 'lodash';
@@ -62,48 +62,52 @@ export default function LogInForm({ switchToSignUp }: Props) {
     [setFormState, setMessage, submit]
   );
   return (
-    <>
-      <LogInFormContainer>
-        <StatusBar state={formState}>{message}</StatusBar>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
+    <Grow in={true}>
+      <Box>
+        <LogInFormContainer>
+          <StatusBar state={formState}>{message}</StatusBar>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={(values, { resetForm }) =>
+              handleSubmit(values, resetForm)
+            }
+          >
+            {(formikProps) => (
+              <form onSubmit={formikProps.handleSubmit}>
+                <Heading variant="h5" sx={{ mb: 3 }}>
+                  Log in
+                </Heading>
+                <TextField
+                  label="Email"
+                  name="email"
+                  value={formikProps.values.email}
+                  onChange={formikProps.handleChange('email')}
+                  sx={{ mb: 2 }}
+                />
+                <TextField
+                  label="Password"
+                  name="password"
+                  value={formikProps.values.password}
+                  onChange={formikProps.handleChange('password')}
+                  type="password"
+                />
+                <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+                  Log in
+                </Button>
+              </form>
+            )}
+          </Formik>
+        </LogInFormContainer>
+        <Button
+          variant="text"
+          onClick={switchToSignUp}
+          color="secondary"
+          fullWidth
+          sx={{ mt: 1 }}
         >
-          {(formikProps) => (
-            <form onSubmit={formikProps.handleSubmit}>
-              <Heading variant="h5" sx={{ mb: 3 }}>
-                Log in
-              </Heading>
-              <TextField
-                label="Email"
-                name="email"
-                value={formikProps.values.email}
-                onChange={formikProps.handleChange('email')}
-                sx={{ mb: 2 }}
-              />
-              <TextField
-                label="Password"
-                name="password"
-                value={formikProps.values.password}
-                onChange={formikProps.handleChange('password')}
-                type="password"
-              />
-              <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-                Log in
-              </Button>
-            </form>
-          )}
-        </Formik>
-      </LogInFormContainer>
-      <Button
-        variant="text"
-        onClick={switchToSignUp}
-        color="secondary"
-        fullWidth
-        sx={{ mt: 1 }}
-      >
-        I don't have an account yet
-      </Button>
-    </>
+          I don't have an account yet
+        </Button>
+      </Box>
+    </Grow>
   );
 }

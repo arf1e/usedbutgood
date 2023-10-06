@@ -1,5 +1,5 @@
 import { CloseOutlined } from '@mui/icons-material';
-import { Box, Container, IconButton, styled, Typography } from '@mui/material';
+import { Box, Container, IconButton, Slide, styled } from '@mui/material';
 import useCartOverlay from '../hooks/useCartOverlay';
 import Heading from './Heading';
 
@@ -10,7 +10,7 @@ const CartOverlayContainer = styled(Box)`
   width: 100%;
   height: 100%;
   z-index: 2;
-  background-color: white;
+  background-color: ${({ theme }) => theme.palette.background.default};
 
   .close-icon {
     color: ${({ theme }) => theme.palette.primary.main};
@@ -19,19 +19,18 @@ const CartOverlayContainer = styled(Box)`
 
 export default function CartOverlay() {
   const { isShown, hideCartOverlay } = useCartOverlay();
-
-  if (!isShown) return <></>;
-
   return (
-    <CartOverlayContainer>
-      <Container>
-        <Box sx={{ display: 'flex', py: 2, justifyContent: 'flex-end' }}>
-          <IconButton onClick={hideCartOverlay}>
-            <CloseOutlined className="close-icon" />
-          </IconButton>
-        </Box>
-        <Heading variant="h2">Cart</Heading>
-      </Container>
-    </CartOverlayContainer>
+    <Slide in={isShown}>
+      <CartOverlayContainer>
+        <Container>
+          <Box sx={{ display: 'flex', py: 2, justifyContent: 'flex-end' }}>
+            <IconButton onClick={hideCartOverlay}>
+              <CloseOutlined className="close-icon" />
+            </IconButton>
+          </Box>
+          <Heading variant="h2">Cart</Heading>
+        </Container>
+      </CartOverlayContainer>
+    </Slide>
   );
 }
