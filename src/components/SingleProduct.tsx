@@ -31,7 +31,7 @@ export default function SingleProduct({ product }: Props) {
       <Grid container spacing={2} alignItems="stretch">
         <Grid item xs={12} md={6}>
           {product.images.length > 0 && (
-            <ProductImagery images={product.images} />
+            <ProductImagery images={product.images} showsDisclaimer={true} />
           )}
         </Grid>
         <Grid item xs={12} md={6}>
