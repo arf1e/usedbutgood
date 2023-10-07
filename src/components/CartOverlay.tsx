@@ -1,23 +1,9 @@
 import { CloseOutlined } from '@mui/icons-material';
-import { Box, Container, IconButton, Slide, styled } from '@mui/material';
+import { Box, Container, IconButton, Slide } from '@mui/material';
 import useCartOverlay from '../hooks/useCartOverlay';
+import CartOverlayContainer from '../styled/CartOverlayContainer';
+import Heading from '../styled/Heading';
 import CartItemsList from './CartItemsList';
-import Heading from './Heading';
-
-const CartOverlayContainer = styled(Box)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  z-index: 2;
-  background-color: ${({ theme }) => theme.palette.background.default};
-
-  .close-icon {
-    color: ${({ theme }) => theme.palette.primary.main};
-  }
-`;
 
 export default function CartOverlay() {
   const { isShown, hideCartOverlay } = useCartOverlay();

@@ -11,7 +11,7 @@ import useStatusBar, {
 } from '../hooks/useStatusBar';
 import { LoginInterface } from '../types/user';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
-import Heading from './Heading';
+import Heading from '../styled/Heading';
 
 type Props = {
   switchToSignUp: () => void;

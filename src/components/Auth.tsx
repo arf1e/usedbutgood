@@ -1,7 +1,7 @@
 import { Box, Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import { useState } from 'react';
-import Heading from './Heading';
+import Heading from '../styled/Heading';
 import LogInForm from './LogInForm';
 import SignUpForm from './SignUpForm';
 

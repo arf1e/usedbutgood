@@ -1,27 +1,19 @@
-import { Grid, styled, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../slices';
 import { selectItemQuantityInCart } from '../slices/cartSlice';
+import Heading from '../styled/Heading';
+import ProductInfoContainer from '../styled/ProductInfoContainer';
 import { ProductType } from '../types/product';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
 import CartControls from './CartControls';
 import CategoryBadge from './CategoryBadge';
-import Heading from './Heading';
 import ProductImagery from './ProductImagery';
 
 type Props = {
   product: ProductType;
 };
 
-const ProductInfoContainer = styled(Box)`
-  background-color: ${({ theme }) => composeBackgroundColor(theme)};
-  display: flex;
-  padding: 2em;
-  border-radius: 1em;
-  flex-direction: column;
-  align-items: flex-start;
-`;
 export default function SingleProduct({ product }: Props) {
   const itemQty = useSelector((state: RootState) =>
     selectItemQuantityInCart(state.cart, product.id)

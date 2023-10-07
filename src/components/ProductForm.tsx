@@ -1,4 +1,4 @@
-import { Box, Button, InputAdornment, styled, TextField } from '@mui/material';
+import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import _ from 'lodash';
 import { useCreateProductMutation } from '../apis/fakestore';
@@ -8,28 +8,14 @@ import useStatusBar, {
   FORM_SUCCESS,
   StatusBar,
 } from '../hooks/useStatusBar';
+import FormContainer from '../styled/FormContainer';
+import Heading from '../styled/Heading';
 import { CreateProductInterface } from '../types/product';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
 import CategoryPicker from './CategoryPicker';
-import Heading from './Heading';
 
 type Props = {
   providedValues?: CreateProductInterface;
 };
-
-const FormContainer = styled(Box)`
-  background-color: ${({ theme }) => composeBackgroundColor(theme)};
-  border-radius: 1em;
-
-  form {
-    padding: 2em;
-  }
-
-  .section {
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 const initialValues: CreateProductInterface = {
   title: '',

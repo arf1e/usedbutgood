@@ -1,4 +1,4 @@
-import { Box, Button, Grow, styled, TextField } from '@mui/material';
+import { Box, Button, Grow, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import { useCallback } from 'react';
 import _ from 'lodash';
@@ -9,23 +9,12 @@ import useStatusBar, {
   StatusBar,
 } from '../hooks/useStatusBar';
 import { LoginInterface } from '../types/user';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
-import Heading from './Heading';
+import Heading from '../styled/Heading';
+import LogInFormContainer from '../styled/LoginFormContainer';
 
 type Props = {
   switchToLogIn: () => void;
 };
-
-const LogInFormContainer = styled(Box)`
-  background-color: ${({ theme }) => composeBackgroundColor(theme)};
-  border-radius: 1em;
-
-  form {
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 const initialValues = {
   email: '',

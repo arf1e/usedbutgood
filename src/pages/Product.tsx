@@ -1,4 +1,4 @@
-import { Box, Container, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import _ from 'lodash';
 import { useParams } from 'react-router-dom';
 import { useGetProductByIdQuery } from '../apis/fakestore';

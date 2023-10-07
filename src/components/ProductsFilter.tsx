@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  styled,
   TextField,
   ToggleButtonGroup,
   ToggleButton,
@@ -18,30 +17,11 @@ import {
   ProductApiFiltersInterface,
   ProductsSortingOptionType,
 } from '../types/product';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
-import Heading from './Heading';
 import * as yup from 'yup';
 import CategoryPicker from './CategoryPicker';
 import { RootState } from '../slices';
-
-const ProductsFilterContainer = styled(Box)`
-  background: ${({ theme }) => composeBackgroundColor(theme)};
-  border-radius: 8px;
-  display: flex;
-  padding: 1em;
-  flex-direction: column;
-  margin: 0;
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .price-range {
-    display: flex;
-    gap: 1em;
-  }
-`;
+import ProductsFilterContainer from '../styled/ProductsFilterContainer';
+import Heading from '../styled/Heading';
 
 const filtersInitialValues: Partial<ProductApiFiltersInterface> = {
   title: '',

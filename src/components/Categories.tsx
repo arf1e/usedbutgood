@@ -1,29 +1,8 @@
-import { Box, Container, styled, Typography, useTheme } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { Box, Container, Typography, useTheme } from '@mui/material';
+import AnimatedTag from '../styled/AnimatedTag';
+import Heading from '../styled/Heading';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 import CategoriesList from './CategoriesList';
-import Heading from './Heading';
-
-const AnimatedTag = styled('span')`
-  @keyframes glow {
-    0% {
-      color: inherit;
-      transform: scale(1);
-    }
-
-    50% {
-      color: ${blue['700']};
-      transform: scale(1.05);
-    }
-
-    100% {
-      color: inherit;
-      transform: scale(1);
-    }
-  }
-  display: inline-flex;
-  animation: glow 6s ease-in-out infinite;
-`;
 
 export default function Categories() {
   const theme = useTheme();
