@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import _ from 'lodash';
 import { productsApi } from '../apis/fakestore';
-import { ProductApiFiltersInterface, ProductType } from '../types/product';
+import {
+  ProductApiFiltersInterface,
+  ProductsSortingOptionType,
+  ProductType,
+} from '../types/product';
 import { calculateTotalPages, getPaginatedSlice } from '../utils/pagination';
 
 export const PRODUCTS_PER_PAGE = 12;
@@ -10,6 +15,7 @@ type ProductsState = {
   totalPages: number;
   filters: Partial<ProductApiFiltersInterface>;
   products: ProductType[];
+  sort: ProductsSortingOptionType;
 };
 
 export const initialState: ProductsState = {
@@ -17,6 +23,7 @@ export const initialState: ProductsState = {
   filters: {},
   page: 1,
   totalPages: 1,
+  sort: 'default',
 };
 
 export const productsSlice = createSlice({
@@ -56,6 +63,11 @@ export const productsSlice = createSlice({
       const shouldAllowPageChange = newPage >= 1 && newPage <= state.totalPages;
       if (shouldAllowPageChange) state.page = newPage;
     },
+
+    setSort: (state, action: PayloadAction<ProductsSortingOptionType>) => {
+      state.sort = action.payload;
+      state.page = 1;
+    },
   },
 
   extraReducers: (builder) => {
@@ -78,15 +90,25 @@ export const {
   incrementPage,
   decrementPage,
   setPage,
+  setSort,
 } = productsSlice.actions;
 
 export const selectProducts = (state: ProductsState) => {
-  return getPaginatedSlice(state.products, state.page, PRODUCTS_PER_PAGE);
+  const mapper: {
+    [key: string]: (products: ProductType[]) => ProductType[];
+  } = {
+    default: (products) => products,
+    priceAsc: (products) => _.orderBy(products, 'price', 'asc'),
+    priceDesc: (products) => _.orderBy(products, 'price', 'desc'),
+  };
+  const source = mapper[state.sort](state.products);
+  return getPaginatedSlice(source, state.page, PRODUCTS_PER_PAGE);
 };
 export const selectFilters = (state: ProductsState) => state.filters;
 export const selectPaginationParams = (state: ProductsState) => {
   const { page, totalPages } = state;
   return { page, totalPages };
 };
+export const selectSort = (state: ProductsState) => state.sort;
 
 export default productsSlice.reducer;

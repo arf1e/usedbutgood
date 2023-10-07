@@ -1,4 +1,4 @@
-import { Box, Container, Typography, useTheme } from '@mui/material';
+import { Box, Container, useTheme } from '@mui/material';
 import AppLogo from './AppLogo';
 import CartButton from './CartButton';
 import CartOverlay from './CartOverlay';

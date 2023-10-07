@@ -53,7 +53,7 @@ export default function CartControls({ product, size = 'small' }: Props) {
         Add to cart
       </Button>
     );
-  }, []);
+  }, [handleAddToCart, size]);
   const renderQuantityControls = useMemo(() => {
     return (
       <Box
@@ -92,6 +92,7 @@ export default function CartControls({ product, size = 'small' }: Props) {
             size={size}
             color="error"
             onClick={handleClear}
+            sx={{ marginLeft: 2 }}
             endIcon={<DeleteOutlined />}
           >
             Remove from cart
@@ -99,7 +100,7 @@ export default function CartControls({ product, size = 'small' }: Props) {
         )}
       </Box>
     );
-  }, [itemQty, handleIncrement, handleDecrement, handleClear]);
+  }, [itemQty, handleIncrement, handleDecrement, handleClear, size]);
 
   return <>{itemQty === 0 ? renderAddToCartButton : renderQuantityControls}</>;
 }

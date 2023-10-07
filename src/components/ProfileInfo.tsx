@@ -2,7 +2,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetProfileQuery } from '../apis/fakestore';
 import { AppDispatch, RootState } from '../slices';
-import { logOut, selectJwt, selectUser } from '../slices/authSlice';
+import { logOut, selectUser } from '../slices/authSlice';
 import { JWTPairType } from '../types/user';
 
 type Props = {

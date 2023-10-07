@@ -95,7 +95,7 @@ export default function PostingPromotion() {
           </Button>
         </Box>
         <Box className="decoration">
-          <img src={PromotionImage} className="base-image" />
+          <img src={PromotionImage} alt="" className="base-image" />
         </Box>
       </PostingPromotionContainer>
     </Container>

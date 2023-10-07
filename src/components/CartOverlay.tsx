@@ -1,6 +1,7 @@
 import { CloseOutlined } from '@mui/icons-material';
 import { Box, Container, IconButton, Slide, styled } from '@mui/material';
 import useCartOverlay from '../hooks/useCartOverlay';
+import CartItemsList from './CartItemsList';
 import Heading from './Heading';
 
 const CartOverlayContainer = styled(Box)`
@@ -9,6 +10,7 @@ const CartOverlayContainer = styled(Box)`
   left: 0;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
   z-index: 2;
   background-color: ${({ theme }) => theme.palette.background.default};
 
@@ -29,6 +31,7 @@ export default function CartOverlay() {
             </IconButton>
           </Box>
           <Heading variant="h2">Cart</Heading>
+          <CartItemsList handleCloseCart={hideCartOverlay} />
         </Container>
       </CartOverlayContainer>
     </Slide>

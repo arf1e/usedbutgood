@@ -1,8 +1,23 @@
-import { Box, Button, styled, TextField } from '@mui/material';
+import {
+  Box,
+  Button,
+  styled,
+  TextField,
+  ToggleButtonGroup,
+  ToggleButton,
+} from '@mui/material';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFilters, setFilters } from '../slices/productsSlice';
-import { ProductApiFiltersInterface } from '../types/product';
+import {
+  selectFilters,
+  selectSort,
+  setFilters,
+  setSort,
+} from '../slices/productsSlice';
+import {
+  ProductApiFiltersInterface,
+  ProductsSortingOptionType,
+} from '../types/product';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 import Heading from './Heading';
 import * as yup from 'yup';
@@ -48,6 +63,10 @@ export default function ProductsFilter() {
   const filters = useSelector((state: RootState) =>
     selectFilters(state.products)
   );
+  const sort = useSelector((state: RootState) => selectSort(state.products));
+  const handleSetSort = (value: ProductsSortingOptionType) => {
+    dispatch(setSort(value));
+  };
   return (
     <ProductsFilterContainer>
       <Heading variant="h5" sx={{ mb: 2 }}>
@@ -91,6 +110,24 @@ export default function ProductsFilter() {
                 formikProps.setFieldValue('categoryId', value)
               }
             />
+            <Heading variant="h5" sx={{ mt: 2 }}>
+              Sorting
+            </Heading>
+            <ToggleButtonGroup
+              value={sort}
+              exclusive
+              onChange={(_e, value) => handleSetSort(value)}
+            >
+              <ToggleButton value="default" disabled={sort === 'default'}>
+                Don't care
+              </ToggleButton>
+              <ToggleButton value="priceAsc" disabled={sort === 'priceAsc'}>
+                Price ascending
+              </ToggleButton>
+              <ToggleButton value="priceDesc" disabled={sort === 'priceDesc'}>
+                Price descending
+              </ToggleButton>
+            </ToggleButtonGroup>
             <Button type="submit" variant="contained" sx={{ mt: 2 }}>
               Apply
             </Button>

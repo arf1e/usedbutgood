@@ -1,7 +1,6 @@
 import { Box, Container, styled, Typography, useTheme } from '@mui/material';
-import { blue, grey, orange, pink, red } from '@mui/material/colors';
-import { useMemo } from 'react';
-import useColorMode from '../hooks/useColorMode';
+import { blue } from '@mui/material/colors';
+import composeBackgroundColor from '../utils/composeBackgroundColor';
 import CategoriesList from './CategoriesList';
 import Heading from './Heading';
 
@@ -27,14 +26,10 @@ const AnimatedTag = styled('span')`
 `;
 
 export default function Categories() {
-  const { colorMode } = useColorMode();
-  const bgColor = useMemo(
-    () => (colorMode === 'light' ? grey[100] : grey[900]),
-    [colorMode]
-  );
+  const theme = useTheme();
   return (
     <Container sx={{ marginY: 8 }}>
-      <Box padding={4} bgcolor={bgColor} borderRadius={4}>
+      <Box padding={4} bgcolor={composeBackgroundColor(theme)} borderRadius={4}>
         <Heading variant="h3" sx={{ mb: 4 }}>
           A service like you have never <AnimatedTag>#usedbefore</AnimatedTag>
         </Heading>

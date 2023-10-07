@@ -28,3 +28,5 @@ export interface CreateProductInterface {
   images: string[];
   categoryId: string;
 }
+
+export type ProductsSortingOptionType = 'default' | 'priceAsc' | 'priceDesc';

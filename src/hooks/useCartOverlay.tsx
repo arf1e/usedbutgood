@@ -17,8 +17,14 @@ export const CartOverlayContext = createContext<{
 export default function useCartOverlay() {
   const { isShown, setIsShown } = useContext(CartOverlayContext);
 
-  const showCartOverlay = () => setIsShown(true);
-  const hideCartOverlay = () => setIsShown(false);
+  const showCartOverlay = () => {
+    setIsShown(true);
+    document.body.style.overflowY = 'hidden';
+  };
+  const hideCartOverlay = () => {
+    setIsShown(false);
+    document.body.style.overflowY = 'auto';
+  };
 
   return {
     isShown,
