@@ -8,7 +8,7 @@ import {
   selectFilters,
   selectProducts,
 } from '../slices/productsSlice';
-import ProductCard from './ProductCard';
+import ProductCard, { ProductCardSkeleton } from './ProductCard';
 
 const ProductsListContainer = styled(Box)``;
 
@@ -16,7 +16,9 @@ export default function ProductList() {
   const filters = useSelector((state: RootState) =>
     selectFilters(state.products)
   );
-  const { error, isLoading } = useGetAllProductsQuery(filters);
+  const { error, isLoading } = useGetAllProductsQuery(filters, {
+    refetchOnMountOrArgChange: true,
+  });
   const products = useSelector((state: RootState) =>
     selectProducts(state.products)
   );
@@ -24,7 +26,7 @@ export default function ProductList() {
   const renderSkeletons = useMemo(() => {
     return new Array(PRODUCTS_PER_PAGE).fill(null).map((_, index) => (
       <Grid key={index} item xs={6} sm={4} md={3}>
-        <Skeleton key={index} width="100%" height="120px" />
+        <ProductCardSkeleton />
       </Grid>
     ));
   }, []);

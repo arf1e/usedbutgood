@@ -3,6 +3,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Skeleton,
   Typography,
   useTheme,
 } from '@mui/material';
@@ -70,6 +71,29 @@ const ProductCard = ({ product }: Props) => {
       <CardActions>
         <CartControls product={product} />
       </CardActions>
+    </Card>
+  );
+};
+
+export const ProductCardSkeleton = () => {
+  const theme = useTheme();
+  return (
+    <Card
+      sx={{
+        bgcolor: composeBackgroundColor(theme),
+        height: 280,
+        boxShadow: 'none',
+      }}
+    >
+      <CardContent>
+        <Skeleton height={24} width={80} />
+        <Skeleton height={32} sx={{ my: 2 }} />
+        <Skeleton height={16} width={200} />
+        <Skeleton height={16} width={200} />
+        <Skeleton height={16} width={200} />
+        <Skeleton height={16} width={200} />
+        <Skeleton height={44} width={120} />
+      </CardContent>
     </Card>
   );
 };

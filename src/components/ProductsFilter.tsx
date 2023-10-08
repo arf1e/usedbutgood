@@ -5,9 +5,10 @@ import {
   ToggleButtonGroup,
   ToggleButton,
 } from '@mui/material';
-import { Formik } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  clearFilters,
   selectFilters,
   selectSort,
   setFilters,
@@ -22,6 +23,8 @@ import CategoryPicker from './CategoryPicker';
 import { RootState } from '../slices';
 import ProductsFilterContainer from '../styled/ProductsFilterContainer';
 import Heading from '../styled/Heading';
+import { ClearOutlined } from '@mui/icons-material';
+import _ from 'lodash';
 
 const filtersInitialValues: Partial<ProductApiFiltersInterface> = {
   title: '',
@@ -43,10 +46,10 @@ export default function ProductsFilter() {
   const filters = useSelector((state: RootState) =>
     selectFilters(state.products)
   );
-  const sort = useSelector((state: RootState) => selectSort(state.products));
-  const handleSetSort = (value: ProductsSortingOptionType) => {
-    dispatch(setSort(value));
+  const handleReset = () => {
+    dispatch(setFilters(filtersInitialValues));
   };
+
   return (
     <ProductsFilterContainer>
       <Heading variant="h5" sx={{ mb: 2 }}>
@@ -56,10 +59,14 @@ export default function ProductsFilter() {
         initialValues={{ ...filtersInitialValues, ...filters }}
         validationSchema={validationSchema}
         onSubmit={handleSetFilters}
+        onReset={handleReset}
       >
         {(formikProps) => (
-          <form onSubmit={formikProps.handleSubmit}>
-            <Box className="price-range" sx={{ marginY: 2 }}>
+          <form
+            onSubmit={formikProps.handleSubmit}
+            onReset={formikProps.handleReset}
+          >
+            <Box className="section" sx={{ marginY: 2 }}>
               <TextField
                 label="Product title"
                 variant="outlined"
@@ -67,6 +74,14 @@ export default function ProductsFilter() {
                 value={formikProps.values.title}
                 onChange={formikProps.handleChange('title')}
               />
+              <CategoryPicker
+                value={formikProps.values.categoryId || ''}
+                setValue={(value) =>
+                  formikProps.setFieldValue('categoryId', value)
+                }
+              />
+            </Box>
+            <Box className="section" sx={{ marginY: 2 }}>
               <TextField
                 label="Min price"
                 variant="outlined"
@@ -84,33 +99,29 @@ export default function ProductsFilter() {
                 fullWidth
               />
             </Box>
-            <CategoryPicker
-              value={formikProps.values.categoryId || ''}
-              setValue={(value) =>
-                formikProps.setFieldValue('categoryId', value)
-              }
-            />
-            <Heading variant="h5" sx={{ mt: 2 }}>
-              Sorting
-            </Heading>
-            <ToggleButtonGroup
-              value={sort}
-              exclusive
-              onChange={(_e, value) => handleSetSort(value)}
-            >
-              <ToggleButton value="default" disabled={sort === 'default'}>
-                Don't care
-              </ToggleButton>
-              <ToggleButton value="priceAsc" disabled={sort === 'priceAsc'}>
-                Price ascending
-              </ToggleButton>
-              <ToggleButton value="priceDesc" disabled={sort === 'priceDesc'}>
-                Price descending
-              </ToggleButton>
-            </ToggleButtonGroup>
-            <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-              Apply
-            </Button>
+            <Box className="section" sx={{ marginY: 2 }}>
+              <Button
+                type="submit"
+                disabled={!formikProps.isValid}
+                fullWidth
+                variant="contained"
+              >
+                Apply
+              </Button>
+              <Button
+                type="reset"
+                fullWidth
+                variant="outlined"
+                onClick={() =>
+                  formikProps.resetForm({ values: filtersInitialValues })
+                }
+                color="error"
+                disabled={_.isEqual(formikProps.values, filtersInitialValues)}
+                startIcon={<ClearOutlined />}
+              >
+                Reset
+              </Button>
+            </Box>
           </form>
         )}
       </Formik>

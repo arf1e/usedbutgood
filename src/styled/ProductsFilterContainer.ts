@@ -14,7 +14,7 @@ const ProductsFilterContainer = styled(Box)`
     flex-direction: column;
   }
 
-  .price-range {
+  .section {
     display: flex;
     gap: 1em;
   }

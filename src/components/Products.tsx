@@ -3,6 +3,7 @@ import Heading from '../styled/Heading';
 import ProductList from './ProductList';
 import ProductsFilter from './ProductsFilter';
 import ProductsPagination from './ProductsPagination';
+import ProductsSorting from './ProductsSorting';
 
 export default function Products() {
   return (
@@ -11,8 +12,11 @@ export default function Products() {
         Product catalog
       </Heading>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <ProductsFilter />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ProductsSorting />
         </Grid>
         <Grid item xs={12}>
           <ProductList />

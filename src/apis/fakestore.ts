@@ -17,7 +17,7 @@ export const productsApi = createApi({
       ProductType[],
       Partial<ProductApiFiltersInterface>
     >({
-      query: (filters = {}) => ({
+      query: (filters) => ({
         url: 'products',
         params: {
           ...mapFiltersToQueryParams(filters),
