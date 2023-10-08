@@ -1,15 +1,14 @@
 import { Box, styled } from '@mui/material';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 
-const LogInFormContainer = styled(Box)`
+const ProfileContainer = styled(Box)`
+  margin-top: 4em;
   background-color: ${({ theme }) => composeBackgroundColor(theme)};
   border-radius: 1em;
-
-  form {
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-  }
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
-export default LogInFormContainer;
+export default ProfileContainer;

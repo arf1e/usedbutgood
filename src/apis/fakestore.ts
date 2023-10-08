@@ -1,4 +1,8 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import {
+  createApi,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from '@reduxjs/toolkit/dist/query/react';
 import { API_URL } from '../config/api';
 import { mapFiltersToQueryParams } from '../utils/filtering';
 import {
@@ -7,7 +11,13 @@ import {
   ProductApiFiltersInterface,
   ProductType,
 } from '../types/product';
-import { JWTPairType, LoginInterface, UserType } from '../types/user';
+import {
+  JWTPairType,
+  LoginInterface,
+  SignUpInteface,
+  UserType,
+} from '../types/user';
+import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 
 export const productsApi = createApi({
   reducerPath: 'productsApi',
@@ -72,6 +82,27 @@ export const productsApi = createApi({
         },
       }),
     }),
+    signUp: builder.mutation<JWTPairType, SignUpInteface>({
+      async queryFn(signUpData: SignUpInteface, _api, _options, fetchWithBQ) {
+        const response = await fetchWithBQ({
+          url: 'users',
+          method: 'POST',
+          body: signUpData,
+        });
+        if (response.error) {
+          return { error: response.error as FetchBaseQueryError };
+        }
+        const jwt = (await fetchWithBQ({
+          url: 'auth/login',
+          method: 'POST',
+          body: { email: signUpData.email, password: signUpData.password },
+        })) as QueryReturnValue<JWTPairType, any, any>;
+        if (jwt.error) {
+          return { error: jwt.error as FetchBaseQueryError };
+        }
+        return jwt;
+      },
+    }),
   }),
 });
 
@@ -82,4 +113,5 @@ export const {
   useLogInMutation,
   useGetProfileQuery,
   useGetProductByIdQuery,
+  useSignUpMutation,
 } = productsApi;

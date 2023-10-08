@@ -15,3 +15,11 @@ export type UserType = {
   role: 'customer' | 'admin';
   avatar: string;
 };
+
+export interface SignUpInteface {
+  email: string;
+  password: string;
+  name: string;
+  avatar: string;
+  role: 'customer';
+}

@@ -1,73 +1,71 @@
-import { Box, Button, Grow, styled, TextField } from '@mui/material';
+import { Box, Button, Grow, TextField } from '@mui/material';
 import { Formik } from 'formik';
 import { useCallback } from 'react';
-import _ from 'lodash';
 import { useLogInMutation } from '../apis/fakestore';
 import useStatusBar, {
   FORM_ERROR,
   FORM_LOADING,
   FORM_SUCCESS,
-  StatusBar,
 } from '../hooks/useStatusBar';
 import { LoginInterface } from '../types/user';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
 import Heading from '../styled/Heading';
+import AuthFormContainer from '../styled/AuthFormContainer';
+import handleFormSubmit from '../utils/handleFormSubmit';
+import * as yup from 'yup';
+import { LoginOutlined } from '@mui/icons-material';
+import StatusBar from '../styled/StatusBar';
 
 type Props = {
   switchToSignUp: () => void;
 };
-
-const LogInFormContainer = styled(Box)`
-  background-color: ${({ theme }) => composeBackgroundColor(theme)};
-  border-radius: 1em;
-
-  form {
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
-  }
-`;
 
 const initialValues: LoginInterface = {
   email: '',
   password: '',
 };
 
+const validationSchema = yup.object({
+  email: yup.string().email('Invalid email address').required('Required'),
+  password: yup.string().required('Please provide a password').min(4),
+});
+
 export default function LogInForm({ switchToSignUp }: Props) {
   const { formState, message, setFormState, setMessage } = useStatusBar();
   const [submit] = useLogInMutation();
+
+  const handleSubmitError = useCallback(
+    (error: string) => {
+      setFormState(FORM_ERROR);
+      setMessage(error);
+    },
+    [setFormState, setMessage]
+  );
+
+  const handleSubmitSuccess = (reset: () => void) => {
+    setFormState(FORM_SUCCESS);
+    setMessage('Successfully logged in.');
+    reset();
+  };
+
   const handleSubmit = useCallback(
     async (values: LoginInterface, reset: () => void) => {
       setFormState(FORM_LOADING);
-      try {
-        const result = await submit(values);
-        if ('error' in result) {
-          setFormState(FORM_ERROR);
-          const errorMessage = _.get(
-            result,
-            ['error', 'data', 'message'],
-            'Failed to log in.'
-          );
-          setMessage(errorMessage);
-          return;
-        }
-        setFormState(FORM_SUCCESS);
-        setMessage('Successfully logged in.');
-        reset();
-      } catch (e) {
-        setFormState(FORM_ERROR);
-        setMessage('Failed to log in due to a network error.');
-      }
+      await handleFormSubmit(() => submit(values), {
+        onSuccess: () => handleSubmitSuccess(reset),
+        onError: handleSubmitError,
+        fallbackErrorMsg: 'Failed to log in due to a network error.',
+      });
     },
-    [setFormState, setMessage, submit]
+    [submit, handleSubmitSuccess, handleSubmitError, setFormState]
   );
   return (
     <Grow in={true}>
       <Box>
-        <LogInFormContainer>
+        <AuthFormContainer>
           <StatusBar state={formState}>{message}</StatusBar>
           <Formik
             initialValues={initialValues}
+            validationSchema={validationSchema}
             onSubmit={(values, { resetForm }) =>
               handleSubmit(values, resetForm)
             }
@@ -91,13 +89,19 @@ export default function LogInForm({ switchToSignUp }: Props) {
                   onChange={formikProps.handleChange('password')}
                   type="password"
                 />
-                <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+                <Button
+                  type="submit"
+                  disabled={!formikProps.dirty || !formikProps.isValid}
+                  variant="contained"
+                  sx={{ mt: 2 }}
+                  endIcon={<LoginOutlined />}
+                >
                   Log in
                 </Button>
               </form>
             )}
           </Formik>
-        </LogInFormContainer>
+        </AuthFormContainer>
         <Button
           variant="text"
           onClick={switchToSignUp}

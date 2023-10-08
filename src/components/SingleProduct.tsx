@@ -2,12 +2,14 @@ import { Grid, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import { useSelector } from 'react-redux';
 import { RootState } from '../slices';
+import { selectJwt } from '../slices/authSlice';
 import { selectItemQuantityInCart } from '../slices/cartSlice';
 import Heading from '../styled/Heading';
 import ProductInfoContainer from '../styled/ProductInfoContainer';
 import { ProductType } from '../types/product';
 import CartControls from './CartControls';
 import CategoryBadge from './CategoryBadge';
+import ProductAdminActions from './ProductAdminActions';
 import ProductImagery from './ProductImagery';
 
 type Props = {
@@ -57,6 +59,7 @@ export default function SingleProduct({ product }: Props) {
               <CartControls size="large" product={product} />
             </Box>
           </ProductInfoContainer>
+          <ProductAdminActions />
         </Grid>
       </Grid>
     </Container>

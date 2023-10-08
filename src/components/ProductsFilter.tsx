@@ -1,29 +1,14 @@
-import {
-  Box,
-  Button,
-  TextField,
-  ToggleButtonGroup,
-  ToggleButton,
-} from '@mui/material';
-import { Formik, FormikProps } from 'formik';
+import { Box, Button, TextField } from '@mui/material';
+import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  clearFilters,
-  selectFilters,
-  selectSort,
-  setFilters,
-  setSort,
-} from '../slices/productsSlice';
-import {
-  ProductApiFiltersInterface,
-  ProductsSortingOptionType,
-} from '../types/product';
+import { selectFilters, setFilters } from '../slices/productsSlice';
+import { ProductApiFiltersInterface } from '../types/product';
 import * as yup from 'yup';
 import CategoryPicker from './CategoryPicker';
 import { RootState } from '../slices';
 import ProductsFilterContainer from '../styled/ProductsFilterContainer';
 import Heading from '../styled/Heading';
-import { ClearOutlined } from '@mui/icons-material';
+import { CheckOutlined, ClearOutlined } from '@mui/icons-material';
 import _ from 'lodash';
 
 const filtersInitialValues: Partial<ProductApiFiltersInterface> = {
@@ -102,9 +87,10 @@ export default function ProductsFilter() {
             <Box className="section" sx={{ marginY: 2 }}>
               <Button
                 type="submit"
-                disabled={!formikProps.isValid}
+                disabled={!formikProps.isValid || !formikProps.dirty}
                 fullWidth
                 variant="contained"
+                startIcon={<CheckOutlined />}
               >
                 Apply
               </Button>

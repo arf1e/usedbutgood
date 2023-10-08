@@ -6,12 +6,14 @@ import useStatusBar, {
   FORM_ERROR,
   FORM_LOADING,
   FORM_SUCCESS,
-  StatusBar,
 } from '../hooks/useStatusBar';
 import FormContainer from '../styled/FormContainer';
 import Heading from '../styled/Heading';
+import StatusBar from '../styled/StatusBar';
 import { CreateProductInterface } from '../types/product';
 import CategoryPicker from './CategoryPicker';
+import handleFormSubmit from '../utils/handleFormSubmit';
+import { useCallback } from 'react';
 
 type Props = {
   providedValues?: CreateProductInterface;
@@ -29,31 +31,30 @@ export default function ProductForm({ providedValues }: Props) {
   const [submit] = useCreateProductMutation();
   const { formState, message, setFormState, setMessage } = useStatusBar();
 
-  const handleSubmit = async (
-    values: CreateProductInterface,
-    reset: () => void
-  ) => {
-    setFormState(FORM_LOADING);
-    try {
-      const result = await submit(values);
-      if ('error' in result) {
-        setFormState(FORM_ERROR);
-        const errorMessage = _.get(
-          result,
-          ['error', 'data', 'message'],
-          'Failed to create your posting.'
-        );
-        setMessage(errorMessage);
-        return;
-      }
+  const onCreateProductSuccess = useCallback(
+    (reset: () => void) => {
       setFormState(FORM_SUCCESS);
       setMessage('🚀 Your posting has been created!');
       reset();
-    } catch (e) {
-      setFormState(FORM_ERROR);
-      setMessage('Network error occured. Please try again later.');
-    }
-  };
+    },
+    [setFormState, setMessage]
+  );
+
+  const onCreateProductError = useCallback(() => {
+    setFormState(FORM_ERROR);
+    setMessage('Network error occured. Please try again later.');
+  }, [setFormState, setMessage]);
+
+  const handleSubmit = useCallback(
+    async (values: CreateProductInterface, reset: () => void) => {
+      setFormState(FORM_LOADING);
+      await handleFormSubmit(() => submit(values), {
+        onSuccess: () => onCreateProductSuccess(reset),
+        onError: onCreateProductError,
+      });
+    },
+    [submit, onCreateProductSuccess, onCreateProductError]
+  );
   return (
     <FormContainer>
       <StatusBar state={formState}>{message}</StatusBar>

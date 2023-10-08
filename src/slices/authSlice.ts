@@ -30,6 +30,13 @@ const authSlice = createSlice({
       }
     );
     builder.addMatcher(
+      productsApi.endpoints.signUp.matchFulfilled,
+      (state, { payload }) => {
+        const jwtPair = payload;
+        state.jwt = jwtPair;
+      }
+    );
+    builder.addMatcher(
       productsApi.endpoints.getProfile.matchFulfilled,
       (state, { payload }) => {
         state.user = payload;

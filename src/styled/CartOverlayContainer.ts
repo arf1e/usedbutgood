@@ -9,6 +9,7 @@ const CartOverlayContainer = styled(Box)`
   overflow-y: scroll;
   z-index: 2;
   background-color: ${({ theme }) => theme.palette.background.default};
+  /* backdrop-filter: blur(200px); */
 
   .close-icon {
     color: ${({ theme }) => theme.palette.primary.main};
