@@ -10,10 +10,10 @@ import useStatusBar, {
 import { LoginInterface } from '../types/user';
 import Heading from '../styled/Heading';
 import AuthFormContainer from '../styled/AuthFormContainer';
-import handleFormSubmit from '../utils/handleFormSubmit';
 import * as yup from 'yup';
 import { LoginOutlined } from '@mui/icons-material';
 import StatusBar from '../styled/StatusBar';
+import handleAsyncOperation from '../utils/handleAsyncOperation';
 
 type Props = {
   switchToSignUp: () => void;
@@ -50,7 +50,7 @@ export default function LogInForm({ switchToSignUp }: Props) {
   const handleSubmit = useCallback(
     async (values: LoginInterface, reset: () => void) => {
       setFormState(FORM_LOADING);
-      await handleFormSubmit(() => submit(values), {
+      await handleAsyncOperation(() => submit(values), {
         onSuccess: () => handleSubmitSuccess(reset),
         onError: handleSubmitError,
         fallbackErrorMsg: 'Failed to log in due to a network error.',

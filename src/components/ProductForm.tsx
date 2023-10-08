@@ -12,8 +12,8 @@ import Heading from '../styled/Heading';
 import StatusBar from '../styled/StatusBar';
 import { CreateProductInterface } from '../types/product';
 import CategoryPicker from './CategoryPicker';
-import handleFormSubmit from '../utils/handleFormSubmit';
 import { useCallback } from 'react';
+import handleAsyncOperation from '../utils/handleAsyncOperation';
 
 type Props = {
   providedValues?: CreateProductInterface;
@@ -48,7 +48,7 @@ export default function ProductForm({ providedValues }: Props) {
   const handleSubmit = useCallback(
     async (values: CreateProductInterface, reset: () => void) => {
       setFormState(FORM_LOADING);
-      await handleFormSubmit(() => submit(values), {
+      await handleAsyncOperation(() => submit(values), {
         onSuccess: () => onCreateProductSuccess(reset),
         onError: onCreateProductError,
       });

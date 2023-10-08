@@ -1,18 +1,26 @@
 import _ from 'lodash';
 
-type handleFormSubmitInputHelpers = {
+type InputHelpersType = {
   onSuccess: (result: any) => void;
   onError: (error: string) => void;
   fallbackErrorMsg?: string;
 };
 
-const handleFormSubmit = async (
+/**
+ * Wrapper for handling async operations in cases where it's too comples to use RTK-Query helpers.
+ * It's a simple wrapper around try/catch block which provides { onSuccess, onError } callbacks for side-effects handling.
+ *
+ * @param submitFn - async function to be executed
+ * @param onSuccess - callback to be executed in case of success.
+ * @param onError - callback to be executed in case of error.
+ */
+const handleAsyncOperation = async (
   submitFn: () => Promise<any>,
   {
     onSuccess,
     onError,
     fallbackErrorMsg = 'Unknown error happened.',
-  }: handleFormSubmitInputHelpers
+  }: InputHelpersType
 ) => {
   try {
     const result = await submitFn();
@@ -32,4 +40,4 @@ const handleFormSubmit = async (
   }
 };
 
-export default handleFormSubmit;
+export default handleAsyncOperation;

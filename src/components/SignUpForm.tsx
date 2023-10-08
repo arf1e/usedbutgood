@@ -8,12 +8,12 @@ import useStatusBar, {
 } from '../hooks/useStatusBar';
 import { SignUpInteface } from '../types/user';
 import Heading from '../styled/Heading';
-import handleFormSubmit from '../utils/handleFormSubmit';
 import AuthFormContainer from '../styled/AuthFormContainer';
 import { useSignUpMutation } from '../apis/fakestore';
 import * as yup from 'yup';
 import { PersonAddAltOutlined } from '@mui/icons-material';
 import StatusBar from '../styled/StatusBar';
+import handleAsyncOperation from '../utils/handleAsyncOperation';
 
 type Props = {
   switchToLogIn: () => void;
@@ -53,7 +53,7 @@ export default function SignUpForm({ switchToLogIn }: Props) {
   const handleSubmit = useCallback(
     async (values: SignUpInteface, reset: () => void) => {
       setFormState(FORM_LOADING);
-      await handleFormSubmit(() => signUp(values), {
+      await handleAsyncOperation(() => signUp(values), {
         onSuccess: () => onFormSuccess(reset),
         onError: onError,
         fallbackErrorMsg: 'Failed to sign up due to a network error.',

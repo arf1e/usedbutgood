@@ -10,17 +10,15 @@ import {
 
 const ToasterContainer = styled(Box)<{ shown: boolean; status: STATUS_TYPES }>`
   position: fixed;
-  bottom: ${({ shown }) => (shown ? '5%' : '-5%')};
+  bottom: ${({ shown }) => (shown ? 0 : '-5%')};
   transition: 0.3s ease-in-out;
   opacity: ${({ shown }) => (shown ? 1 : 0)};
   padding: 1em;
   cursor: pointer;
-  border-radius: 1em;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50vw;
-  left: calc(50% - 25vw);
+  width: 100vw;
   z-index: 3;
   background-color: ${({ theme, status }) => {
     const darkMode = theme.palette.mode === 'dark';
@@ -38,8 +36,6 @@ const ToasterContainer = styled(Box)<{ shown: boolean; status: STATUS_TYPES }>`
     }[status];
     return color;
   }};
-  box-shadow: ${({ theme, status }) =>
-    status === STATUS_IDLE ? 'none' : theme.shadows[1]};
 `;
 
 export default ToasterContainer;
