@@ -46,12 +46,17 @@ export const productsSlice = createSlice({
     },
 
     clearFilters: (state) => {
-      state.filters = {};
+      state.filters = initialState.filters;
       state.page = 1;
     },
 
     setProducts: (state, action: PayloadAction<ProductType[]>) => {
       state.products = action.payload;
+      state.totalPages = calculateTotalPages(
+        action.payload.length,
+        PRODUCTS_PER_PAGE
+      );
+      state.page = 1;
     },
 
     incrementPage: (state) => {
@@ -98,6 +103,7 @@ export const {
   clearFilters,
   incrementPage,
   decrementPage,
+  setProducts,
   setPage,
   setSort,
 } = productsSlice.actions;

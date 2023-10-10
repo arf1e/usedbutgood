@@ -8,6 +8,11 @@ export const handlers = [
   rest.get(`${API_URL}/products`, (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(productsFixture));
   }),
+
+  rest.post(`${API_URL}/users`, (_req, res, cts) => {
+    return res(cts.status(201), cts.json(userFixture));
+  }),
+
   rest.post(`${API_URL}/auth/login`, async (req, res, ctx) => {
     const { email } = await req.json<LoginInterface>();
     if (email === passingUser.email) {

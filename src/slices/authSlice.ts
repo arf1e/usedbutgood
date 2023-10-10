@@ -47,10 +47,10 @@ const authSlice = createSlice({
 
 export const { logOut } = authSlice.actions;
 
-export const selectJwt = (state: { auth: AuthState }) => state.auth.jwt;
-export const selectUser = (state: { auth: AuthState }) => state.auth.user;
-export const selectAdminRights = (state: { auth: AuthState }) => {
-  const user = state.auth.user;
+export const selectJwt = (state: AuthState) => state.jwt;
+export const selectUser = (state: AuthState) => state.user;
+export const selectAdminRights = (state: AuthState) => {
+  const user = state.user;
   if (user) {
     return user.role === 'admin';
   }

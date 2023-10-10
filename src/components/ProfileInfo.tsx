@@ -27,7 +27,7 @@ type Props = {
 
 export default function ProfileInfo({ jwt }: Props) {
   const { isLoading, error } = useGetProfileQuery(jwt);
-  const profile = useSelector((state: RootState) => selectUser(state));
+  const profile = useSelector((state: RootState) => selectUser(state.auth));
   const dispatch = useDispatch<AppDispatch>();
   const handleLogOut = () => {
     dispatch(logOut());

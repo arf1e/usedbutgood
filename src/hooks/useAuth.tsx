@@ -9,7 +9,7 @@ export default function useAuth() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<UserType | null>(null);
 
-  const jwt = useSelector((state: RootState) => selectJwt(state));
+  const jwt = useSelector((state: RootState) => selectJwt(state.auth));
   const { data: profile, isLoading: isLoadingQuery } = useGetProfileQuery(
     jwt || { access_token: '', refresh_token: '' }
   );
