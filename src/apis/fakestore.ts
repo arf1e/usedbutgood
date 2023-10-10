@@ -22,6 +22,7 @@ import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 export const productsApi = createApi({
   reducerPath: 'productsApi',
   baseQuery: fetchBaseQuery({ baseUrl: API_URL }),
+  tagTypes: ['Product'],
   endpoints: (builder) => ({
     getAllProducts: builder.query<
       ProductType[],
@@ -33,6 +34,13 @@ export const productsApi = createApi({
           ...mapFiltersToQueryParams(filters),
         },
       }),
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: 'Product' as const, id })),
+              'Product',
+            ]
+          : ['Product'],
     }),
     getCategories: builder.query<CategoryType[], void>({
       query: () => ({
@@ -43,6 +51,7 @@ export const productsApi = createApi({
       query: (id: number) => ({
         url: `products/${id}`,
       }),
+      providesTags: (_result, _error, id) => [{ type: 'Product', id }],
     }),
     createProduct: builder.mutation<ProductType, CreateProductInterface>({
       query: (productData: CreateProductInterface) => ({
@@ -60,6 +69,7 @@ export const productsApi = createApi({
         method: 'PUT',
         body: productData,
       }),
+      invalidatesTags: (_r, _error, arg) => [{ type: 'Product', id: arg.id }],
     }),
     deleteProduct: builder.mutation<boolean, number>({
       query: (id: number) => ({
@@ -113,6 +123,7 @@ export const {
   useLogInMutation,
   useGetProfileQuery,
   useDeleteProductMutation,
+  useUpdateProductMutation,
   useGetProductByIdQuery,
   useSignUpMutation,
 } = productsApi;

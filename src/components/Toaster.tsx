@@ -35,7 +35,11 @@ export default function Toaster() {
   }, [status]);
 
   return (
-    <ToasterContainer shown={shown} status={status} onClick={hideToaster}>
+    <ToasterContainer
+      shown={shown ? 1 : 0}
+      status={status}
+      onClick={hideToaster}
+    >
       <Typography variant="body1" color="white" sx={{ fontWeight: 500 }}>
         {message}
       </Typography>

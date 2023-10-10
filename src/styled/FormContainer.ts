@@ -13,6 +13,15 @@ const FormContainer = styled(Box)`
     display: flex;
     flex-direction: column;
   }
+
+  .image-preview {
+    background: ${({ theme }) => composeBackgroundColor(theme, 2)};
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-right: 1em;
+    margin-bottom: 1em;
+  }
 `;
 
 export default FormContainer;

@@ -8,11 +8,15 @@ import {
   STATUS_TYPES,
 } from '../hooks/useToaster';
 
-const ToasterContainer = styled(Box)<{ shown: boolean; status: STATUS_TYPES }>`
+/**
+ * Seems like material uses an old version of styled components and does not support transcient props.
+ * Because of that I can't pass 'shown' prop as a boolean and have to do the ugly check against 1.
+ */
+const ToasterContainer = styled(Box)<{ shown: number; status: STATUS_TYPES }>`
   position: fixed;
-  bottom: ${({ shown }) => (shown ? 0 : '-5%')};
+  bottom: ${({ shown }) => (shown === 1 ? 0 : '-5%')};
   transition: 0.3s ease-in-out;
-  opacity: ${({ shown }) => (shown ? 1 : 0)};
+  opacity: ${({ shown }) => (shown === 1 ? 1 : 0)};
   padding: 1em;
   cursor: pointer;
   display: flex;

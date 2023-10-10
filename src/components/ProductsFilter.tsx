@@ -87,7 +87,7 @@ export default function ProductsFilter() {
             <Box className="section" sx={{ marginY: 2 }}>
               <Button
                 type="submit"
-                disabled={!formikProps.isValid || !formikProps.dirty}
+                disabled={!formikProps.isValid}
                 fullWidth
                 variant="contained"
                 startIcon={<CheckOutlined />}

@@ -20,7 +20,10 @@ type ProductsState = {
 
 export const initialState: ProductsState = {
   products: [],
-  filters: {},
+  filters: {
+    title: '',
+    categoryId: '',
+  },
   page: 1,
   totalPages: 1,
   sort: 'default',
@@ -110,6 +113,7 @@ export const selectProducts = (state: ProductsState) => {
   const source = mapper[state.sort](state.products);
   return getPaginatedSlice(source, state.page, PRODUCTS_PER_PAGE);
 };
+
 export const selectFilters = (state: ProductsState) => state.filters;
 export const selectPaginationParams = (state: ProductsState) => {
   const { page, totalPages } = state;

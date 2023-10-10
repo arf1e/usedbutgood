@@ -13,7 +13,7 @@ type Props = {
 };
 
 export default function ProductAdminActions({ id }: Props) {
-  const hasAdminRights = useAdminRights();
+  const { hasAdminRights } = useAdminRights();
   const [deleteProduct, { isLoading: isDeleteLoading }] =
     useDeleteProductMutation();
   const navigate = useNavigate();
@@ -24,20 +24,13 @@ export default function ProductAdminActions({ id }: Props) {
     showSuccessMessage('Successfully deleted the product!');
   }, [navigate, showSuccessMessage]);
 
-  const onDeleteError = useCallback(
-    (error: string) => {
-      showErrorMessage(error);
-    },
-    [showErrorMessage]
-  );
-
   const handleDelete = useCallback(async () => {
     await handleAsyncOperation(() => deleteProduct(id), {
       onSuccess: onDeleteSuccess,
-      onError: onDeleteError,
+      onError: showErrorMessage,
       fallbackErrorMsg: 'Failed to delete the product.',
     });
-  }, [deleteProduct, id, showErrorMessage, showSuccessMessage]);
+  }, [deleteProduct, id, showErrorMessage, onDeleteSuccess]);
 
   if (hasAdminRights) {
     return (
@@ -49,7 +42,12 @@ export default function ProductAdminActions({ id }: Props) {
           mt: 2,
         }}
       >
-        <Button variant="outlined" sx={{ mr: 2 }} endIcon={<EditOutlined />}>
+        <Button
+          variant="outlined"
+          onClick={() => navigate(`/edit/${id}`)}
+          sx={{ mr: 2 }}
+          endIcon={<EditOutlined />}
+        >
           Update Product
         </Button>
         <Button

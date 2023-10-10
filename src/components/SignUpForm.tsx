@@ -41,15 +41,23 @@ export default function SignUpForm({ switchToLogIn }: Props) {
   const { formState, message, setFormState, setMessage } = useStatusBar();
   const [signUp] = useSignUpMutation();
 
-  const onFormSuccess = (reset: () => void) => {
-    setFormState(FORM_SUCCESS);
-    setMessage('Successfully signed up!');
-    reset();
-  };
-  const onError = (error: string) => {
-    setFormState(FORM_ERROR);
-    setMessage(error);
-  };
+  const onFormSuccess = useCallback(
+    (reset: () => void) => {
+      setFormState(FORM_SUCCESS);
+      setMessage('Successfully signed up!');
+      reset();
+    },
+    [setFormState, setMessage]
+  );
+
+  const onError = useCallback(
+    (error: string) => {
+      setFormState(FORM_ERROR);
+      setMessage(error);
+    },
+    [setFormState, setMessage]
+  );
+
   const handleSubmit = useCallback(
     async (values: SignUpInteface, reset: () => void) => {
       setFormState(FORM_LOADING);
@@ -59,7 +67,7 @@ export default function SignUpForm({ switchToLogIn }: Props) {
         fallbackErrorMsg: 'Failed to sign up due to a network error.',
       });
     },
-    [setFormState, setMessage, signUp]
+    [setFormState, signUp, onError, onFormSuccess]
   );
   return (
     <Grow in={true}>

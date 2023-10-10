@@ -32,7 +32,7 @@ export default function ProductImagery({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [hidden, setHidden] = useState(showsDisclaimer);
   return (
-    <ImageryContainer blurred={hidden}>
+    <ImageryContainer blurred={hidden ? 1 : 0}>
       {hidden && (
         <Box className="disclaimer">
           <Typography variant="caption">Disclaimer</Typography>
@@ -64,7 +64,11 @@ export default function ProductImagery({
       )}
       <Box className="blurrable">
         {images.map((image, index) => (
-          <AnimatedImage active={currentIndex === index} src={image} />
+          <AnimatedImage
+            key={`${image}-${index}`}
+            active={currentIndex === index}
+            src={image}
+          />
         ))}
         {images.length > 1 && (
           <ToggleButtonGroup

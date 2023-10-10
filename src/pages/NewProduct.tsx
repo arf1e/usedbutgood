@@ -1,19 +1,28 @@
 import { Grid, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
+import { useCreateProductMutation } from '../apis/fakestore';
 import ProductForm from '../components/ProductForm';
 import Heading from '../styled/Heading';
 import NewProductPromotion from '../styled/NewProductPromotion';
+import { CreateProductInterface } from '../types/product';
 
-export default function New() {
+export default function NewProduct() {
+  const [createProduct] = useCreateProductMutation();
   return (
     <Box sx={{ minHeight: '100vh' }}>
       <Container>
-        <Heading variant="h1" sx={{ marginY: 8 }} textAlign="center">
+        <Heading variant="h1" id="top" sx={{ marginY: 8 }} textAlign="center">
           Submit a new posting
         </Heading>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={6}>
-            <ProductForm />
+            <ProductForm
+              submitFn={(values: CreateProductInterface) =>
+                createProduct(values)
+              }
+              shouldResetOnSuccess={true}
+              successMessage="🚀 Success! Your product has been submitted."
+            />
           </Grid>
           <Grid item xs={12} md={6}>
             <NewProductPromotion>

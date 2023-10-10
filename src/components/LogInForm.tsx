@@ -41,11 +41,14 @@ export default function LogInForm({ switchToSignUp }: Props) {
     [setFormState, setMessage]
   );
 
-  const handleSubmitSuccess = (reset: () => void) => {
-    setFormState(FORM_SUCCESS);
-    setMessage('Successfully logged in.');
-    reset();
-  };
+  const handleSubmitSuccess = useCallback(
+    (reset: () => void) => {
+      setFormState(FORM_SUCCESS);
+      setMessage('Successfully logged in.');
+      reset();
+    },
+    [setFormState, setMessage]
+  );
 
   const handleSubmit = useCallback(
     async (values: LoginInterface, reset: () => void) => {

@@ -24,7 +24,7 @@ const handleAsyncOperation = async (
 ) => {
   try {
     const result = await submitFn();
-    if ('error' in result) {
+    if (_.has(result, 'error')) {
       const error = _.get(
         result,
         ['error', 'data', 'message'],
@@ -35,6 +35,7 @@ const handleAsyncOperation = async (
     }
     onSuccess(result);
   } catch (error: any) {
+    console.log('ERROR', error);
     const errorMsg = _.get(error, 'message', fallbackErrorMsg);
     onError(errorMsg);
   }

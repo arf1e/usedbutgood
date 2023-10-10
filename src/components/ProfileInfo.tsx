@@ -1,9 +1,21 @@
-import { LogoutOutlined } from '@mui/icons-material';
-import { Box, Button, Container, Grid, Typography } from '@mui/material';
+import {
+  LogoutOutlined,
+  SentimentVeryDissatisfiedOutlined,
+} from '@mui/icons-material';
+import _ from 'lodash';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetProfileQuery } from '../apis/fakestore';
 import { AppDispatch, RootState } from '../slices';
 import { logOut, selectUser } from '../slices/authSlice';
+import CenterContainer from '../styled/CenterContainer';
 import Heading from '../styled/Heading';
 import ProfileContainer from '../styled/ProfileContainer';
 import ProfileImage from '../styled/ProfileImage';
@@ -20,7 +32,25 @@ export default function ProfileInfo({ jwt }: Props) {
   const handleLogOut = () => {
     dispatch(logOut());
   };
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <CenterContainer>
+        <CircularProgress size={100} />
+      </CenterContainer>
+    );
+
+  if (error)
+    return (
+      <CenterContainer>
+        <SentimentVeryDissatisfiedOutlined
+          color="error"
+          sx={{ fontSize: 64, mb: 4 }}
+        />
+        <Typography variant="h6" color="error">
+          {`Error: ${_.get(error, 'message', 'Failed to fetch your profile')}`}
+        </Typography>
+      </CenterContainer>
+    );
 
   return (
     <Container sx={{ my: 8, minHeight: '100vh' }}>

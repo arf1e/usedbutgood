@@ -1,23 +1,19 @@
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useGetProfileQuery } from '../apis/fakestore';
-import { RootState } from '../slices';
-import { selectJwt } from '../slices/authSlice';
+import useAuth from './useAuth';
 
 export default function useAdminRights() {
+  const [isLoading, setIsLoading] = useState(true);
   const [hasAdminRights, setHasAdminRights] = useState(false);
-  const jwt = useSelector((state: RootState) => selectJwt(state));
-  const { data: profile } = useGetProfileQuery(
-    jwt || { access_token: '', refresh_token: '' }
-  );
+  const { isLoading: isAuthLoading, user } = useAuth();
 
   useEffect(() => {
-    if (profile && profile.role === 'admin') {
-      setHasAdminRights(true);
-      return;
+    if (!isAuthLoading) {
+      setIsLoading(false);
+      const role = _.get(user, 'role', 'customer');
+      setHasAdminRights(role === 'admin');
     }
-    setHasAdminRights(false);
-  }, [profile]);
+  }, [user, isAuthLoading]);
 
-  return hasAdminRights;
+  return { isLoading, hasAdminRights };
 }

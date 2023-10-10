@@ -1,7 +1,7 @@
 import { Box, styled } from '@mui/material';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 
-const ImageryContainer = styled(Box)<{ blurred: boolean }>`
+const ImageryContainer = styled(Box)<{ blurred: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +11,7 @@ const ImageryContainer = styled(Box)<{ blurred: boolean }>`
   .blurrable {
     transition: filter 0.2s;
     position: relative;
-    filter: ${({ blurred }) => (blurred ? 'blur(50px)' : 'blur(0)')};
+    filter: ${({ blurred }) => (blurred === 1 ? 'blur(50px)' : 'blur(0)')};
   }
 
   .disclaimer {
