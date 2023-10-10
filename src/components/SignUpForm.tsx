@@ -7,13 +7,13 @@ import useStatusBar, {
   FORM_SUCCESS,
 } from '../hooks/useStatusBar';
 import { SignUpInteface } from '../types/user';
-import Heading from '../styled/Heading';
-import AuthFormContainer from '../styled/AuthFormContainer';
 import { useSignUpMutation } from '../apis/fakestore';
 import * as yup from 'yup';
 import { PersonAddAltOutlined } from '@mui/icons-material';
-import StatusBar from '../styled/StatusBar';
 import handleAsyncOperation from '../utils/handleAsyncOperation';
+import AuthFormContainer from '../styles/styled/AuthFormContainer';
+import StatusBar from '../styles/styled/StatusBar';
+import Heading from '../styles/styled/Heading';
 
 type Props = {
   switchToLogIn: () => void;

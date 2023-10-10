@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import CartProductContainer from '../styled/CartProductContainer';
+import CartProductContainer from '../styles/styled/CartProductContainer';
 import { CartProductType } from '../types/cart';
 import CartControls from './CartControls';
 

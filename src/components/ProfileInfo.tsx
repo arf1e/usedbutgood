@@ -15,11 +15,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGetProfileQuery } from '../apis/fakestore';
 import { AppDispatch, RootState } from '../slices';
 import { logOut, selectUser } from '../slices/authSlice';
-import CenterContainer from '../styled/CenterContainer';
-import Heading from '../styled/Heading';
-import ProfileContainer from '../styled/ProfileContainer';
-import ProfileImage from '../styled/ProfileImage';
 import { JWTPairType } from '../types/user';
+import CenterContainer from '../styles/styled/CenterContainer';
+import Heading from '../styles/styled/Heading';
+import ProfileContainer from '../styles/styled/ProfileContainer';
+import ProfileImage from '../styles/styled/ProfileImage';
 
 type Props = {
   jwt: JWTPairType;

@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const AuthFormContainer = styled(Box)`
   background-color: ${({ theme }) => composeBackgroundColor(theme)};

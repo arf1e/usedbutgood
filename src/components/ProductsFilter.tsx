@@ -6,10 +6,10 @@ import { ProductApiFiltersInterface } from '../types/product';
 import * as yup from 'yup';
 import CategoryPicker from './CategoryPicker';
 import { RootState } from '../slices';
-import ProductsFilterContainer from '../styled/ProductsFilterContainer';
-import Heading from '../styled/Heading';
 import { CheckOutlined, ClearOutlined } from '@mui/icons-material';
 import _ from 'lodash';
+import ProductsFilterContainer from '../styles/styled/ProductsFilterContainer';
+import Heading from '../styles/styled/Heading';
 
 const filtersInitialValues: Partial<ProductApiFiltersInterface> = {
   title: '',

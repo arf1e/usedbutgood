@@ -7,6 +7,7 @@ import { selectJwt } from '../slices/authSlice';
 
 export default function Profile() {
   const jwt = useSelector((state: RootState) => selectJwt(state.auth));
+
   return (
     <Box>
       {!jwt && <Auth />}

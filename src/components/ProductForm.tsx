@@ -12,15 +12,15 @@ import useStatusBar, {
   FORM_LOADING,
   FORM_SUCCESS,
 } from '../hooks/useStatusBar';
-import FormContainer from '../styled/FormContainer';
-import Heading from '../styled/Heading';
-import StatusBar from '../styled/StatusBar';
 import { CreateProductInterface } from '../types/product';
 import CategoryPicker from './CategoryPicker';
 import { useCallback } from 'react';
 import handleAsyncOperation from '../utils/handleAsyncOperation';
 import ImageryInput from './ImageryInput';
 import * as yup from 'yup';
+import FormContainer from '../styles/styled/FormContainer';
+import StatusBar from '../styles/styled/StatusBar';
+import Heading from '../styles/styled/Heading';
 
 type Props = {
   providedValues?: CreateProductInterface;

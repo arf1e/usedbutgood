@@ -5,7 +5,7 @@ import useToaster, {
   STATUS_TYPES,
   ToasterContext,
 } from '../hooks/useToaster';
-import ToasterContainer from '../styled/ToasterContainer';
+import ToasterContainer from '../styles/styled/ToasterContainer';
 
 export const ToasterContextProvider = ({
   children,

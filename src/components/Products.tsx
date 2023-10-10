@@ -1,5 +1,5 @@
 import { Container, Grid } from '@mui/material';
-import Heading from '../styled/Heading';
+import Heading from '../styles/styled/Heading';
 import ProductList from './ProductList';
 import ProductsFilter from './ProductsFilter';
 import ProductsPagination from './ProductsPagination';

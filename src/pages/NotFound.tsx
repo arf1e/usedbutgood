@@ -4,10 +4,11 @@ import {
 } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import CenterContainer from '../styled/CenterContainer';
+import CenterContainer from '../styles/styled/CenterContainer';
 
 export default function NotFound() {
   const navigate = useNavigate();
+
   return (
     <CenterContainer sx={{ minHeight: '80vh' }}>
       <SentimentVeryDissatisfiedOutlined color="error" sx={{ fontSize: 64 }} />

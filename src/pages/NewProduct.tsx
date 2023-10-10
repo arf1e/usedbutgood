@@ -2,8 +2,8 @@ import { Grid, Typography } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import { useCreateProductMutation } from '../apis/fakestore';
 import ProductForm from '../components/ProductForm';
-import Heading from '../styled/Heading';
-import NewProductPromotion from '../styled/NewProductPromotion';
+import Heading from '../styles/styled/Heading';
+import NewProductPromotion from '../styles/styled/NewProductPromotion';
 import { CreateProductInterface } from '../types/product';
 
 export default function NewProduct() {

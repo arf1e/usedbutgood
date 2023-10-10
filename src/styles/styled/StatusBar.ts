@@ -5,8 +5,8 @@ import {
   FORM_LOADING,
   FORM_SUCCESS,
   UseFormStateType,
-} from '../hooks/useStatusBar';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+} from '../../hooks/useStatusBar';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const StatusBar = styled(Box)<{ state: UseFormStateType }>`
   height: 2em;

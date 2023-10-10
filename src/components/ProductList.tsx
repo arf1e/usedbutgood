@@ -10,8 +10,8 @@ import {
   selectFilters,
   selectProducts,
 } from '../slices/productsSlice';
-import CenterContainer from '../styled/CenterContainer';
 import ProductCard, { ProductCardSkeleton } from './ProductCard';
+import CenterContainer from '../styles/styled/CenterContainer';
 
 const PRODUCTS_LOADING = 'LOADING';
 const PRODUCTS_ERROR = 'ERROR';

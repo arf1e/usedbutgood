@@ -1,6 +1,6 @@
 import { Box, Container, Typography, useTheme } from '@mui/material';
-import AnimatedTag from '../styled/AnimatedTag';
-import Heading from '../styled/Heading';
+import AnimatedTag from '../styles/styled/AnimatedTag';
+import Heading from '../styles/styled/Heading';
 import composeBackgroundColor from '../utils/composeBackgroundColor';
 import CategoriesList from './CategoriesList';
 

@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { Container } from '@mui/system';
-import FooterContainer from '../styled/FooterContainer';
+import FooterContainer from '../styles/styled/FooterContainer';
 import AppLogo from './AppLogo';
 
 export default function Footer() {

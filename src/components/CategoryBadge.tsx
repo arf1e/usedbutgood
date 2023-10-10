@@ -1,6 +1,6 @@
 import { LabelOutlined } from '@mui/icons-material';
 import { Typography } from '@mui/material';
-import CategoryBadgeContainer from '../styled/CategoryBadgeContainer';
+import CategoryBadgeContainer from '../styles/styled/CategoryBadgeContainer';
 import { CategoryType } from '../types/product';
 import hashBadgeColor from '../utils/hashBadgeColor';
 

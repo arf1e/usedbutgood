@@ -6,7 +6,7 @@ import {
   STATUS_INFO,
   STATUS_SUCCESS,
   STATUS_TYPES,
-} from '../hooks/useToaster';
+} from '../../hooks/useToaster';
 
 /**
  * Seems like material uses an old version of styled components and does not support transcient props.

@@ -3,12 +3,13 @@ import { Box, Button, Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import { ArrowForward } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import PostingPromotionContainer from '../styled/PostingPromotionContainer';
-import Heading from '../styled/Heading';
+import PostingPromotionContainer from '../styles/styled/PostingPromotionContainer';
+import Heading from '../styles/styled/Heading';
 
 export default function PostingPromotion() {
   const navigate = useNavigate();
   const handleClick = () => navigate('/new');
+
   return (
     <Container sx={{ marginY: 8 }}>
       <PostingPromotionContainer padding={4} borderRadius={4}>

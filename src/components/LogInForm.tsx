@@ -8,12 +8,12 @@ import useStatusBar, {
   FORM_SUCCESS,
 } from '../hooks/useStatusBar';
 import { LoginInterface } from '../types/user';
-import Heading from '../styled/Heading';
-import AuthFormContainer from '../styled/AuthFormContainer';
 import * as yup from 'yup';
 import { LoginOutlined } from '@mui/icons-material';
-import StatusBar from '../styled/StatusBar';
 import handleAsyncOperation from '../utils/handleAsyncOperation';
+import AuthFormContainer from '../styles/styled/AuthFormContainer';
+import Heading from '../styles/styled/Heading';
+import StatusBar from '../styles/styled/StatusBar';
 
 type Props = {
   switchToSignUp: () => void;

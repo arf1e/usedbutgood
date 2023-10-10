@@ -1,5 +1,5 @@
 import useColorMode from '../hooks/useColorMode';
-import MaterialUISwitch from '../styled/MaterialUISwitch';
+import MaterialUISwitch from '../styles/styled/MaterialUISwitch';
 
 export default function ThemeSwitch() {
   const { colorMode, setColorMode } = useColorMode();

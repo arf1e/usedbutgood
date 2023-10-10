@@ -1,5 +1,5 @@
 import { styled, Switch } from '@mui/material';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,

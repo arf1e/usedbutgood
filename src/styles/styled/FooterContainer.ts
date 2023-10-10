@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const FooterContainer = styled(Box)`
   margin-top: 4em;

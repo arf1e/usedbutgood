@@ -1,5 +1,5 @@
 import { styled, Box } from '@mui/material';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const ProductsFilterContainer = styled(Box)`
   background: ${({ theme }) => composeBackgroundColor(theme)};

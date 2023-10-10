@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import composeBackgroundColor from '../utils/composeBackgroundColor';
+import composeBackgroundColor from '../../utils/composeBackgroundColor';
 
 const CartProductContainer = styled(Box)`
   padding: 2em;

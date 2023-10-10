@@ -7,19 +7,23 @@ import {
   selectTotalPrice,
   selectTotalQuantity,
 } from '../slices/cartSlice';
-import CartSumContainer from '../styled/CartSumContainer';
+import CartSumContainer from '../styles/styled/CartSumContainer';
 
 export default function CartSum() {
   const dispatch = useDispatch();
+
   const totalItems = useSelector((state: RootState) =>
     selectTotalQuantity(state.cart)
   );
+
   const totalPrice = useSelector((state: RootState) =>
     selectTotalPrice(state.cart)
   );
+
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+
   return (
     <CartSumContainer>
       <Typography

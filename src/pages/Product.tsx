@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { useParams } from 'react-router-dom';
 import { useGetProductByIdQuery } from '../apis/fakestore';
 import SingleProduct from '../components/SingleProduct';
-import CenterContainer from '../styled/CenterContainer';
+import CenterContainer from '../styles/styled/CenterContainer';
 
 const Product = () => {
   const { id: productId } = useParams<{ id: string }>();

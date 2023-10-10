@@ -1,10 +1,10 @@
 import { Button, Collapse, TextField, Zoom } from '@mui/material';
 import { Box } from '@mui/system';
 import { TransitionGroup } from 'react-transition-group';
-import Heading from '../styled/Heading';
 import _ from 'lodash';
 import { useCallback, useMemo } from 'react';
 import getRandomImage from '../utils/getRandomImage';
+import Heading from '../styles/styled/Heading';
 
 const MAX_IMAGES_ON_PRODUCT_ALLOWED = 4;
 

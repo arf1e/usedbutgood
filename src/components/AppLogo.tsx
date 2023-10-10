@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import AppLogoButton from '../styled/AppLogoButton';
+import AppLogoButton from '../styles/styled/AppLogoButton';
 
 export default function AppLogo() {
   const navigate = useNavigate();

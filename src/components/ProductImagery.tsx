@@ -8,7 +8,7 @@ import {
   Zoom,
 } from '@mui/material';
 import { useState } from 'react';
-import ImageryContainer from '../styled/ImageryContainer';
+import ImageryContainer from '../styles/styled/ImageryContainer';
 
 type Props = {
   images: string[];
