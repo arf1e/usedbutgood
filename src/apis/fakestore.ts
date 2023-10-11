@@ -125,5 +125,6 @@ export const {
   useDeleteProductMutation,
   useUpdateProductMutation,
   useGetProductByIdQuery,
+  useLazyGetProfileQuery,
   useSignUpMutation,
 } = productsApi;

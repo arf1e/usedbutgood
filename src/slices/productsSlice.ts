@@ -121,6 +121,7 @@ export const selectProducts = (state: ProductsState) => {
 };
 
 export const selectFilters = (state: ProductsState) => state.filters;
+
 export const selectPaginationParams = (state: ProductsState) => {
   const { page, totalPages } = state;
   return { page, totalPages };

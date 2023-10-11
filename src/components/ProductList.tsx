@@ -10,8 +10,8 @@ import {
   selectFilters,
   selectProducts,
 } from '../slices/productsSlice';
-import ProductCard, { ProductCardSkeleton } from './ProductCard';
 import CenterContainer from '../styles/styled/CenterContainer';
+import ProductCard, { ProductCardSkeleton } from './ProductCard';
 
 const PRODUCTS_LOADING = 'LOADING';
 const PRODUCTS_ERROR = 'ERROR';
@@ -55,7 +55,7 @@ export default function ProductList() {
     }
 
     setState(PRODUCTS_LIST);
-  }, [isFetching, error, products]);
+  }, [isFetching, error, products.length]);
 
   const renderSkeletons = useMemo(() => {
     return new Array(PRODUCTS_PER_PAGE).fill(null).map((_, index) => (
