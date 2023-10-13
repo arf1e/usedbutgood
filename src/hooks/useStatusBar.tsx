@@ -11,6 +11,9 @@ export type UseFormStateType =
   | typeof FORM_SUCCESS
   | typeof FORM_ERROR;
 
+/**
+ * Custom hook for displaying the status of a form lifecycle.
+ */
 export default function useStatusBar() {
   const [formState, setFormState] = useState<UseFormStateType>(FORM_IDLE);
   const [message, setMessage] = useState<string | null>(null);

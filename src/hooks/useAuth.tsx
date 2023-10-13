@@ -5,7 +5,14 @@ import { RootState } from '../slices';
 import { selectJwt, selectUser } from '../slices/authSlice';
 import { UserType } from '../types/user';
 
-export default function useAuth() {
+/**
+ * Hook that gets the current user either from the store or from the API.
+ * @returns {Object} { isLoading, user }
+ */
+export default function useAuth(): {
+  isLoading: boolean;
+  user: UserType | null;
+} {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<UserType | null>(null);
   const [getProfile] = useLazyGetProfileQuery();

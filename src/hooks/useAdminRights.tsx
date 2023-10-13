@@ -2,7 +2,14 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import useAuth from './useAuth';
 
-export default function useAdminRights() {
+/**
+ * Hook to check if the user has admin rights. Utilizes the useAuth hook.
+ * @returns {Object} { isLoading, hasAdminRights }
+ * */
+export default function useAdminRights(): {
+  isLoading: boolean;
+  hasAdminRights: boolean;
+} {
   const [isLoading, setIsLoading] = useState(true);
   const [hasAdminRights, setHasAdminRights] = useState(false);
   const { isLoading: isAuthLoading, user } = useAuth();
